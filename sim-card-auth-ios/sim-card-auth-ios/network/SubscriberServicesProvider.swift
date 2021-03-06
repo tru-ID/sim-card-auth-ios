@@ -11,7 +11,7 @@ public class SubscriberServicesProvider {
 
     let provider: Subscriber
 
-    init(dataProvider: Subscriber = SubscriberCheckDataProvider()) {
+    init(dataProvider: Subscriber = SubscriberCheck()) {
         provider = dataProvider
     }
 
@@ -22,7 +22,7 @@ public class SubscriberServicesProvider {
     func validate(phoneNumber: String, handler: @escaping ()->Void) {
 
         // This call will initiate the subscriber check workflow
-        provider.check(withServer: "Server URL") { (result) in
+        provider.check(phoneNumber: phoneNumber, withServer: "Server URL") { (result) in
             
             // The Server returns the SubscriberCheck results to the device.
         }
