@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F36DF40C25F3841400CD5421 /* SimcardAuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36DF40B25F3841400CD5421 /* SimcardAuthProvider.swift */; };
 		F3BE64AF25ECE80F00CBAB40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BE64AE25ECE80F00CBAB40 /* AppDelegate.swift */; };
 		F3BE64B125ECE80F00CBAB40 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BE64B025ECE80F00CBAB40 /* SceneDelegate.swift */; };
 		F3BE64B325ECE80F00CBAB40 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BE64B225ECE80F00CBAB40 /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 		F3BE64C625ECE81000CBAB40 /* sim_card_auth_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BE64C525ECE81000CBAB40 /* sim_card_auth_iosTests.swift */; };
 		F3BE64D125ECE81000CBAB40 /* sim_card_auth_iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BE64D025ECE81000CBAB40 /* sim_card_auth_iosUITests.swift */; };
 		F3BE64E325ECE83100CBAB40 /* TruSDK in Frameworks */ = {isa = PBXBuildFile; productRef = F3BE64E225ECE83100CBAB40 /* TruSDK */; };
+		F3BE65AB25F37B9A00CBAB40 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BE65AA25F37B9A00CBAB40 /* DataProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F36DF40B25F3841400CD5421 /* SimcardAuthProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimcardAuthProvider.swift; sourceTree = "<group>"; };
+		F36DF41025F3926F00CD5421 /* iOS-SAMPLE-README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "iOS-SAMPLE-README.md"; sourceTree = "<group>"; };
 		F3BE64AB25ECE80F00CBAB40 /* sim-card-auth-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "sim-card-auth-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3BE64AE25ECE80F00CBAB40 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F3BE64B025ECE80F00CBAB40 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -52,6 +56,7 @@
 		F3BE64D225ECE81000CBAB40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F3BE64E925ECE96300CBAB40 /* SampleCode.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = SampleCode.xcconfig; sourceTree = "<group>"; };
 		F3BE64F125ECE9B200CBAB40 /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		F3BE65AA25F37B9A00CBAB40 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +88,7 @@
 		F3BE64A225ECE80F00CBAB40 = {
 			isa = PBXGroup;
 			children = (
+				F36DF41025F3926F00CD5421 /* iOS-SAMPLE-README.md */,
 				F3BE64AD25ECE80F00CBAB40 /* sim-card-auth-ios */,
 				F3BE64C425ECE81000CBAB40 /* sim-card-auth-iosTests */,
 				F3BE64CF25ECE81000CBAB40 /* sim-card-auth-iosUITests */,
@@ -108,6 +114,8 @@
 				F3BE64AE25ECE80F00CBAB40 /* AppDelegate.swift */,
 				F3BE64B025ECE80F00CBAB40 /* SceneDelegate.swift */,
 				F3BE64B225ECE80F00CBAB40 /* ViewController.swift */,
+				F36DF40B25F3841400CD5421 /* SimcardAuthProvider.swift */,
+				F3BE65AA25F37B9A00CBAB40 /* DataProvider.swift */,
 				F3BE64B425ECE80F00CBAB40 /* Main.storyboard */,
 				F3BE64B725ECE81000CBAB40 /* Assets.xcassets */,
 				F3BE64B925ECE81000CBAB40 /* LaunchScreen.storyboard */,
@@ -288,7 +296,9 @@
 			files = (
 				F3BE64B325ECE80F00CBAB40 /* ViewController.swift in Sources */,
 				F3BE64AF25ECE80F00CBAB40 /* AppDelegate.swift in Sources */,
+				F3BE65AB25F37B9A00CBAB40 /* DataProvider.swift in Sources */,
 				F3BE64B125ECE80F00CBAB40 /* SceneDelegate.swift in Sources */,
+				F36DF40C25F3841400CD5421 /* SimcardAuthProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
