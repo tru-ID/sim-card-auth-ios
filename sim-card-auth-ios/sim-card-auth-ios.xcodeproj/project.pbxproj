@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,7 @@
 		F3BE64BB25ECE81000CBAB40 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3BE64B925ECE81000CBAB40 /* LaunchScreen.storyboard */; };
 		F3BE64C625ECE81000CBAB40 /* sim_card_auth_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BE64C525ECE81000CBAB40 /* sim_card_auth_iosTests.swift */; };
 		F3BE64D125ECE81000CBAB40 /* sim_card_auth_iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BE64D025ECE81000CBAB40 /* sim_card_auth_iosUITests.swift */; };
+		F3BE64E325ECE83100CBAB40 /* TruSDK in Frameworks */ = {isa = PBXBuildFile; productRef = F3BE64E225ECE83100CBAB40 /* TruSDK */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,8 @@
 		F3BE64CC25ECE81000CBAB40 /* sim-card-auth-iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "sim-card-auth-iosUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3BE64D025ECE81000CBAB40 /* sim_card_auth_iosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sim_card_auth_iosUITests.swift; sourceTree = "<group>"; };
 		F3BE64D225ECE81000CBAB40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F3BE64E925ECE96300CBAB40 /* SampleCode.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = SampleCode.xcconfig; sourceTree = "<group>"; };
+		F3BE64F125ECE9B200CBAB40 /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3BE64E325ECE83100CBAB40 /* TruSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +87,8 @@
 				F3BE64C425ECE81000CBAB40 /* sim-card-auth-iosTests */,
 				F3BE64CF25ECE81000CBAB40 /* sim-card-auth-iosUITests */,
 				F3BE64AC25ECE80F00CBAB40 /* Products */,
+				F3BE64E825ECE93F00CBAB40 /* License */,
+				F3BE64E725ECE93600CBAB40 /* Configuration */,
 			);
 			sourceTree = "<group>";
 		};
@@ -128,6 +134,22 @@
 			path = "sim-card-auth-iosUITests";
 			sourceTree = "<group>";
 		};
+		F3BE64E725ECE93600CBAB40 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				F3BE64E925ECE96300CBAB40 /* SampleCode.xcconfig */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		F3BE64E825ECE93F00CBAB40 /* License */ = {
+			isa = PBXGroup;
+			children = (
+				F3BE64F125ECE9B200CBAB40 /* LICENSE.txt */,
+			);
+			path = License;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -144,6 +166,9 @@
 			dependencies = (
 			);
 			name = "sim-card-auth-ios";
+			packageProductDependencies = (
+				F3BE64E225ECE83100CBAB40 /* TruSDK */,
+			);
 			productName = "sim-card-auth-ios";
 			productReference = F3BE64AB25ECE80F00CBAB40 /* sim-card-auth-ios.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +240,9 @@
 				Base,
 			);
 			mainGroup = F3BE64A225ECE80F00CBAB40;
+			packageReferences = (
+				F3BE64E125ECE83100CBAB40 /* XCRemoteSwiftPackageReference "tru-sdk-ios" */,
+			);
 			productRefGroup = F3BE64AC25ECE80F00CBAB40 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -317,6 +345,7 @@
 /* Begin XCBuildConfiguration section */
 		F3BE64D325ECE81000CBAB40 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F3BE64E925ECE96300CBAB40 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -378,6 +407,7 @@
 		};
 		F3BE64D425ECE81000CBAB40 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F3BE64E925ECE96300CBAB40 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -433,18 +463,20 @@
 		};
 		F3BE64D625ECE81000CBAB40 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F3BE64E925ECE96300CBAB40 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TYCT88ZT59;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "sim-card-auth-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "id.tru.demo.sim-card-auth-ios";
+				PRODUCT_BUNDLE_IDENTIFIER = "id.tru.demo.sim-card-auth-ios${SAMPLE_CODE_DISAMBIGUATOR}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SAMPLE_CODE_DISAMBIGUATOR = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -452,18 +484,20 @@
 		};
 		F3BE64D725ECE81000CBAB40 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F3BE64E925ECE96300CBAB40 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TYCT88ZT59;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "sim-card-auth-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "id.tru.demo.sim-card-auth-ios";
+				PRODUCT_BUNDLE_IDENTIFIER = "id.tru.demo.sim-card-auth-ios${SAMPLE_CODE_DISAMBIGUATOR}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SAMPLE_CODE_DISAMBIGUATOR = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -471,6 +505,7 @@
 		};
 		F3BE64D925ECE81000CBAB40 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F3BE64E925ECE96300CBAB40 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -493,6 +528,7 @@
 		};
 		F3BE64DA25ECE81000CBAB40 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F3BE64E925ECE96300CBAB40 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -515,6 +551,7 @@
 		};
 		F3BE64DC25ECE81000CBAB40 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F3BE64E925ECE96300CBAB40 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -535,6 +572,7 @@
 		};
 		F3BE64DD25ECE81000CBAB40 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F3BE64E925ECE96300CBAB40 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -593,6 +631,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F3BE64E125ECE83100CBAB40 /* XCRemoteSwiftPackageReference "tru-sdk-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:tru-ID/tru-sdk-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.10;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F3BE64E225ECE83100CBAB40 /* TruSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F3BE64E125ECE83100CBAB40 /* XCRemoteSwiftPackageReference "tru-sdk-ios" */;
+			productName = TruSDK;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F3BE64A325ECE80F00CBAB40 /* Project object */;
 }
