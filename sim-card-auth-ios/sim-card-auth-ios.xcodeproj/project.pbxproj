@@ -1,0 +1,598 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F3BE64AF25ECE80F00CBAB40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BE64AE25ECE80F00CBAB40 /* AppDelegate.swift */; };
+		F3BE64B125ECE80F00CBAB40 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BE64B025ECE80F00CBAB40 /* SceneDelegate.swift */; };
+		F3BE64B325ECE80F00CBAB40 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BE64B225ECE80F00CBAB40 /* ViewController.swift */; };
+		F3BE64B625ECE80F00CBAB40 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3BE64B425ECE80F00CBAB40 /* Main.storyboard */; };
+		F3BE64B825ECE81000CBAB40 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3BE64B725ECE81000CBAB40 /* Assets.xcassets */; };
+		F3BE64BB25ECE81000CBAB40 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3BE64B925ECE81000CBAB40 /* LaunchScreen.storyboard */; };
+		F3BE64C625ECE81000CBAB40 /* sim_card_auth_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BE64C525ECE81000CBAB40 /* sim_card_auth_iosTests.swift */; };
+		F3BE64D125ECE81000CBAB40 /* sim_card_auth_iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BE64D025ECE81000CBAB40 /* sim_card_auth_iosUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F3BE64C225ECE81000CBAB40 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F3BE64A325ECE80F00CBAB40 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F3BE64AA25ECE80F00CBAB40;
+			remoteInfo = "sim-card-auth-ios";
+		};
+		F3BE64CD25ECE81000CBAB40 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F3BE64A325ECE80F00CBAB40 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F3BE64AA25ECE80F00CBAB40;
+			remoteInfo = "sim-card-auth-ios";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F3BE64AB25ECE80F00CBAB40 /* sim-card-auth-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "sim-card-auth-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3BE64AE25ECE80F00CBAB40 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F3BE64B025ECE80F00CBAB40 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		F3BE64B225ECE80F00CBAB40 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F3BE64B525ECE80F00CBAB40 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F3BE64B725ECE81000CBAB40 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F3BE64BA25ECE81000CBAB40 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F3BE64BC25ECE81000CBAB40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F3BE64C125ECE81000CBAB40 /* sim-card-auth-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "sim-card-auth-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3BE64C525ECE81000CBAB40 /* sim_card_auth_iosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sim_card_auth_iosTests.swift; sourceTree = "<group>"; };
+		F3BE64C725ECE81000CBAB40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F3BE64CC25ECE81000CBAB40 /* sim-card-auth-iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "sim-card-auth-iosUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3BE64D025ECE81000CBAB40 /* sim_card_auth_iosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sim_card_auth_iosUITests.swift; sourceTree = "<group>"; };
+		F3BE64D225ECE81000CBAB40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F3BE64A825ECE80F00CBAB40 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3BE64BE25ECE81000CBAB40 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3BE64C925ECE81000CBAB40 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F3BE64A225ECE80F00CBAB40 = {
+			isa = PBXGroup;
+			children = (
+				F3BE64AD25ECE80F00CBAB40 /* sim-card-auth-ios */,
+				F3BE64C425ECE81000CBAB40 /* sim-card-auth-iosTests */,
+				F3BE64CF25ECE81000CBAB40 /* sim-card-auth-iosUITests */,
+				F3BE64AC25ECE80F00CBAB40 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F3BE64AC25ECE80F00CBAB40 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F3BE64AB25ECE80F00CBAB40 /* sim-card-auth-ios.app */,
+				F3BE64C125ECE81000CBAB40 /* sim-card-auth-iosTests.xctest */,
+				F3BE64CC25ECE81000CBAB40 /* sim-card-auth-iosUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F3BE64AD25ECE80F00CBAB40 /* sim-card-auth-ios */ = {
+			isa = PBXGroup;
+			children = (
+				F3BE64AE25ECE80F00CBAB40 /* AppDelegate.swift */,
+				F3BE64B025ECE80F00CBAB40 /* SceneDelegate.swift */,
+				F3BE64B225ECE80F00CBAB40 /* ViewController.swift */,
+				F3BE64B425ECE80F00CBAB40 /* Main.storyboard */,
+				F3BE64B725ECE81000CBAB40 /* Assets.xcassets */,
+				F3BE64B925ECE81000CBAB40 /* LaunchScreen.storyboard */,
+				F3BE64BC25ECE81000CBAB40 /* Info.plist */,
+			);
+			path = "sim-card-auth-ios";
+			sourceTree = "<group>";
+		};
+		F3BE64C425ECE81000CBAB40 /* sim-card-auth-iosTests */ = {
+			isa = PBXGroup;
+			children = (
+				F3BE64C525ECE81000CBAB40 /* sim_card_auth_iosTests.swift */,
+				F3BE64C725ECE81000CBAB40 /* Info.plist */,
+			);
+			path = "sim-card-auth-iosTests";
+			sourceTree = "<group>";
+		};
+		F3BE64CF25ECE81000CBAB40 /* sim-card-auth-iosUITests */ = {
+			isa = PBXGroup;
+			children = (
+				F3BE64D025ECE81000CBAB40 /* sim_card_auth_iosUITests.swift */,
+				F3BE64D225ECE81000CBAB40 /* Info.plist */,
+			);
+			path = "sim-card-auth-iosUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F3BE64AA25ECE80F00CBAB40 /* sim-card-auth-ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F3BE64D525ECE81000CBAB40 /* Build configuration list for PBXNativeTarget "sim-card-auth-ios" */;
+			buildPhases = (
+				F3BE64A725ECE80F00CBAB40 /* Sources */,
+				F3BE64A825ECE80F00CBAB40 /* Frameworks */,
+				F3BE64A925ECE80F00CBAB40 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "sim-card-auth-ios";
+			productName = "sim-card-auth-ios";
+			productReference = F3BE64AB25ECE80F00CBAB40 /* sim-card-auth-ios.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F3BE64C025ECE81000CBAB40 /* sim-card-auth-iosTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F3BE64D825ECE81000CBAB40 /* Build configuration list for PBXNativeTarget "sim-card-auth-iosTests" */;
+			buildPhases = (
+				F3BE64BD25ECE81000CBAB40 /* Sources */,
+				F3BE64BE25ECE81000CBAB40 /* Frameworks */,
+				F3BE64BF25ECE81000CBAB40 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F3BE64C325ECE81000CBAB40 /* PBXTargetDependency */,
+			);
+			name = "sim-card-auth-iosTests";
+			productName = "sim-card-auth-iosTests";
+			productReference = F3BE64C125ECE81000CBAB40 /* sim-card-auth-iosTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F3BE64CB25ECE81000CBAB40 /* sim-card-auth-iosUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F3BE64DB25ECE81000CBAB40 /* Build configuration list for PBXNativeTarget "sim-card-auth-iosUITests" */;
+			buildPhases = (
+				F3BE64C825ECE81000CBAB40 /* Sources */,
+				F3BE64C925ECE81000CBAB40 /* Frameworks */,
+				F3BE64CA25ECE81000CBAB40 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F3BE64CE25ECE81000CBAB40 /* PBXTargetDependency */,
+			);
+			name = "sim-card-auth-iosUITests";
+			productName = "sim-card-auth-iosUITests";
+			productReference = F3BE64CC25ECE81000CBAB40 /* sim-card-auth-iosUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F3BE64A325ECE80F00CBAB40 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1240;
+				LastUpgradeCheck = 1240;
+				TargetAttributes = {
+					F3BE64AA25ECE80F00CBAB40 = {
+						CreatedOnToolsVersion = 12.4;
+					};
+					F3BE64C025ECE81000CBAB40 = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = F3BE64AA25ECE80F00CBAB40;
+					};
+					F3BE64CB25ECE81000CBAB40 = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = F3BE64AA25ECE80F00CBAB40;
+					};
+				};
+			};
+			buildConfigurationList = F3BE64A625ECE80F00CBAB40 /* Build configuration list for PBXProject "sim-card-auth-ios" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F3BE64A225ECE80F00CBAB40;
+			productRefGroup = F3BE64AC25ECE80F00CBAB40 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F3BE64AA25ECE80F00CBAB40 /* sim-card-auth-ios */,
+				F3BE64C025ECE81000CBAB40 /* sim-card-auth-iosTests */,
+				F3BE64CB25ECE81000CBAB40 /* sim-card-auth-iosUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F3BE64A925ECE80F00CBAB40 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3BE64BB25ECE81000CBAB40 /* LaunchScreen.storyboard in Resources */,
+				F3BE64B825ECE81000CBAB40 /* Assets.xcassets in Resources */,
+				F3BE64B625ECE80F00CBAB40 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3BE64BF25ECE81000CBAB40 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3BE64CA25ECE81000CBAB40 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F3BE64A725ECE80F00CBAB40 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3BE64B325ECE80F00CBAB40 /* ViewController.swift in Sources */,
+				F3BE64AF25ECE80F00CBAB40 /* AppDelegate.swift in Sources */,
+				F3BE64B125ECE80F00CBAB40 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3BE64BD25ECE81000CBAB40 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3BE64C625ECE81000CBAB40 /* sim_card_auth_iosTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3BE64C825ECE81000CBAB40 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3BE64D125ECE81000CBAB40 /* sim_card_auth_iosUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F3BE64C325ECE81000CBAB40 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F3BE64AA25ECE80F00CBAB40 /* sim-card-auth-ios */;
+			targetProxy = F3BE64C225ECE81000CBAB40 /* PBXContainerItemProxy */;
+		};
+		F3BE64CE25ECE81000CBAB40 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F3BE64AA25ECE80F00CBAB40 /* sim-card-auth-ios */;
+			targetProxy = F3BE64CD25ECE81000CBAB40 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F3BE64B425ECE80F00CBAB40 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F3BE64B525ECE80F00CBAB40 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F3BE64B925ECE81000CBAB40 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F3BE64BA25ECE81000CBAB40 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F3BE64D325ECE81000CBAB40 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F3BE64D425ECE81000CBAB40 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F3BE64D625ECE81000CBAB40 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TYCT88ZT59;
+				INFOPLIST_FILE = "sim-card-auth-ios/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "id.tru.demo.sim-card-auth-ios";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F3BE64D725ECE81000CBAB40 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TYCT88ZT59;
+				INFOPLIST_FILE = "sim-card-auth-ios/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "id.tru.demo.sim-card-auth-ios";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F3BE64D925ECE81000CBAB40 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TYCT88ZT59;
+				INFOPLIST_FILE = "sim-card-auth-iosTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "id.tru.demo.sim-card-auth-iosTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/sim-card-auth-ios.app/sim-card-auth-ios";
+			};
+			name = Debug;
+		};
+		F3BE64DA25ECE81000CBAB40 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TYCT88ZT59;
+				INFOPLIST_FILE = "sim-card-auth-iosTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "id.tru.demo.sim-card-auth-iosTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/sim-card-auth-ios.app/sim-card-auth-ios";
+			};
+			name = Release;
+		};
+		F3BE64DC25ECE81000CBAB40 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TYCT88ZT59;
+				INFOPLIST_FILE = "sim-card-auth-iosUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "id.tru.demo.sim-card-auth-iosUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "sim-card-auth-ios";
+			};
+			name = Debug;
+		};
+		F3BE64DD25ECE81000CBAB40 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TYCT88ZT59;
+				INFOPLIST_FILE = "sim-card-auth-iosUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "id.tru.demo.sim-card-auth-iosUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "sim-card-auth-ios";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F3BE64A625ECE80F00CBAB40 /* Build configuration list for PBXProject "sim-card-auth-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F3BE64D325ECE81000CBAB40 /* Debug */,
+				F3BE64D425ECE81000CBAB40 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F3BE64D525ECE81000CBAB40 /* Build configuration list for PBXNativeTarget "sim-card-auth-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F3BE64D625ECE81000CBAB40 /* Debug */,
+				F3BE64D725ECE81000CBAB40 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F3BE64D825ECE81000CBAB40 /* Build configuration list for PBXNativeTarget "sim-card-auth-iosTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F3BE64D925ECE81000CBAB40 /* Debug */,
+				F3BE64DA25ECE81000CBAB40 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F3BE64DB25ECE81000CBAB40 /* Build configuration list for PBXNativeTarget "sim-card-auth-iosUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F3BE64DC25ECE81000CBAB40 /* Debug */,
+				F3BE64DD25ECE81000CBAB40 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F3BE64A325ECE80F00CBAB40 /* Project object */;
+}
