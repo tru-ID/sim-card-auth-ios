@@ -14,59 +14,93 @@ enum NetworkError: Error {
     case noData
 }
 
-final class Server {
+final class Server<T: Decodable> {
 
-    func retrieveSubscriberCheckURL(url: String, handler: @escaping (Result<SubscriberCheckModel, NetworkError>)-> Void) {
+    let baseURL: String
 
-        guard let url = URL(string: url) else {
+    init(withBaseURL url: String) {
+        baseURL = url
+    }
+
+    func createSubscriberCheck(withPhoneNumber phoneNumber: String, path: String,
+                               handler: @escaping (Result<T, NetworkError>)-> Void) {
+
+        let urlString = baseURL + path
+        guard let url = URL(string: urlString) else {
             handler(.failure(.invalidURL))
             return
         }
 
-        let session = URLSession.shared
+        let phoneNumberDict = ["phone_number" : phoneNumber]
 
-        let configuration = URLSessionConfiguration.ephemeral //We do not want OS to cache or persist
-        configuration.allowsCellularAccess = true
-        configuration.waitsForConnectivity = true
-        configuration.networkServiceType = .responsiveData
+        let session = createSession()
+        let urlRequest = createURLRequest(method: "POST",url: url, payload: phoneNumberDict)
 
-        let urlRequest = URLRequest(url: url)
+        makeRequest(session: session, urlRequest: urlRequest, handler: handler)
+
+    }
+
+    func retrieveSubscriberCheck(checkId: String, path: String,
+                                 handler: @escaping (Result<T, NetworkError>)-> Void) {//SubscriberCheckModel
+
+        let urlString = baseURL + path
+    }
+
+    private func makeRequest(session: URLSession,
+                     urlRequest: URLRequest,
+                     handler: @escaping (Result<T, NetworkError>)-> Void) {
 
         let task = session.dataTask(with: urlRequest) { (data, response, error) in
+
             if let error = error {
                 handler(.failure(.connectionFailed(error.localizedDescription)))
                 return
             }
+
             guard let httpResponse = response as? HTTPURLResponse,
                   (200...299).contains(httpResponse.statusCode) else {
                 handler(.failure(.connectionFailed("HTTP not OK")))
                 return
             }
 
-            guard let data = data, let mimeType = httpResponse.mimeType, mimeType == "text/html" else {
+            guard let data = data else {
                 handler(.failure(.noData))
                 return
             }
 
-            let string = String(data: data, encoding: .utf8)
+            print("Reponse: \(String(data: data, encoding: .utf8))")
 
-            if let dataModel = try? JSONDecoder().decode(SubscriberCheckModel.self, from: data) {
+            if let dataModel = try? JSONDecoder().decode(T.self, from: data) {
                 DispatchQueue.main.async {
                     handler(.success(dataModel))
                 }
                 return
             }
-
-            //            do {
-            //                let json = try JSONSerialization.jsonObject(with: data, options: [])
-            //                print(json)
-            //            } catch {
-            //                print("JSON error: \(error.localizedDescription)")
-            //            }
-
         }
 
         task.resume()
+    }
+
+    private func createSession()-> URLSession {
+
+        let configuration = URLSessionConfiguration.ephemeral //We do not want OS to cache or persist
+        configuration.allowsCellularAccess = true
+        configuration.waitsForConnectivity = true
+        configuration.networkServiceType = .responsiveData
+
+        return URLSession(configuration: configuration)
+    }
+
+    private func createURLRequest(method: String, url: URL, payload:[String : String])-> URLRequest {
+
+        var urlRequest = URLRequest(url: url)
+        urlRequest.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+        urlRequest.httpMethod = method
+
+        let jsonData = try! JSONSerialization.data(withJSONObject: payload, options: .prettyPrinted)
+        urlRequest.httpBody = jsonData
+
+        return urlRequest
     }
 }
 
