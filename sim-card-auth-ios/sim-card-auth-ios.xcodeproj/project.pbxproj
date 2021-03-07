@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F301133E25F3D43300F4B6F8 /* TruIdService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F301133D25F3D43300F4B6F8 /* TruIdService-Info.plist */; };
+		F301134425F3D4CB00F4B6F8 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F301134325F3D4CB00F4B6F8 /* AppConfiguration.swift */; };
 		F36DF40C25F3841400CD5421 /* SubscriberServicesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36DF40B25F3841400CD5421 /* SubscriberServicesProvider.swift */; };
 		F36DF41925F3AE1400CD5421 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36DF41825F3AE1400CD5421 /* Server.swift */; };
 		F36DF42225F3AE5C00CD5421 /* SubscriberCheckModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36DF42125F3AE5C00CD5421 /* SubscriberCheckModel.swift */; };
@@ -40,8 +42,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F301133D25F3D43300F4B6F8 /* TruIdService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TruIdService-Info.plist"; sourceTree = "<group>"; };
+		F301134325F3D4CB00F4B6F8 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		F36DF40B25F3841400CD5421 /* SubscriberServicesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberServicesProvider.swift; sourceTree = "<group>"; };
-		F36DF41025F3926F00CD5421 /* iOS-SAMPLE-README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "iOS-SAMPLE-README.md"; sourceTree = "<group>"; };
+		F36DF41025F3926F00CD5421 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F36DF41825F3AE1400CD5421 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		F36DF42125F3AE5C00CD5421 /* SubscriberCheckModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberCheckModel.swift; sourceTree = "<group>"; };
 		F3BE64AB25ECE80F00CBAB40 /* sim-card-auth-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "sim-card-auth-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,14 +93,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		F36DF41725F3ADFD00CD5421 /* network */ = {
+		F301134225F3D49600F4B6F8 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				F301134325F3D4CB00F4B6F8 /* AppConfiguration.swift */,
+			);
+			path = util;
+			sourceTree = "<group>";
+		};
+		F36DF41725F3ADFD00CD5421 /* service */ = {
 			isa = PBXGroup;
 			children = (
 				F36DF40B25F3841400CD5421 /* SubscriberServicesProvider.swift */,
 				F3BE65AA25F37B9A00CBAB40 /* SubscriberCheck.swift */,
 				F36DF41825F3AE1400CD5421 /* Server.swift */,
 			);
-			path = network;
+			path = service;
 			sourceTree = "<group>";
 		};
 		F36DF42025F3AE4B00CD5421 /* model */ = {
@@ -110,7 +122,7 @@
 		F3BE64A225ECE80F00CBAB40 = {
 			isa = PBXGroup;
 			children = (
-				F36DF41025F3926F00CD5421 /* iOS-SAMPLE-README.md */,
+				F36DF41025F3926F00CD5421 /* README.md */,
 				F3BE64AD25ECE80F00CBAB40 /* sim-card-auth-ios */,
 				F3BE64C425ECE81000CBAB40 /* sim-card-auth-iosTests */,
 				F3BE64CF25ECE81000CBAB40 /* sim-card-auth-iosUITests */,
@@ -137,11 +149,13 @@
 				F3BE64B025ECE80F00CBAB40 /* SceneDelegate.swift */,
 				F3BE64B225ECE80F00CBAB40 /* ViewController.swift */,
 				F36DF42025F3AE4B00CD5421 /* model */,
-				F36DF41725F3ADFD00CD5421 /* network */,
-				F3BE64B425ECE80F00CBAB40 /* Main.storyboard */,
+				F36DF41725F3ADFD00CD5421 /* service */,
+				F301134225F3D49600F4B6F8 /* util */,
 				F3BE64B725ECE81000CBAB40 /* Assets.xcassets */,
+				F3BE64B425ECE80F00CBAB40 /* Main.storyboard */,
 				F3BE64B925ECE81000CBAB40 /* LaunchScreen.storyboard */,
 				F3BE64BC25ECE81000CBAB40 /* Info.plist */,
+				F301133D25F3D43300F4B6F8 /* TruIdService-Info.plist */,
 			);
 			path = "sim-card-auth-ios";
 			sourceTree = "<group>";
@@ -292,6 +306,7 @@
 				F3BE64BB25ECE81000CBAB40 /* LaunchScreen.storyboard in Resources */,
 				F3BE64B825ECE81000CBAB40 /* Assets.xcassets in Resources */,
 				F3BE64B625ECE80F00CBAB40 /* Main.storyboard in Resources */,
+				F301133E25F3D43300F4B6F8 /* TruIdService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,6 +333,7 @@
 			files = (
 				F36DF42225F3AE5C00CD5421 /* SubscriberCheckModel.swift in Sources */,
 				F3BE64B325ECE80F00CBAB40 /* ViewController.swift in Sources */,
+				F301134425F3D4CB00F4B6F8 /* AppConfiguration.swift in Sources */,
 				F3BE64AF25ECE80F00CBAB40 /* AppDelegate.swift in Sources */,
 				F3BE65AB25F37B9A00CBAB40 /* SubscriberCheck.swift in Sources */,
 				F3BE64B125ECE80F00CBAB40 /* SceneDelegate.swift in Sources */,

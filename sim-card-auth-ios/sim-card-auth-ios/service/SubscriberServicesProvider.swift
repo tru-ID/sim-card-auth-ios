@@ -10,9 +10,11 @@ import Foundation
 public class SubscriberServicesProvider {
 
     let provider: Subscriber
+    let baseUrl: String
 
     init(dataProvider: Subscriber = SubscriberCheck()) {
         provider = dataProvider
+        baseUrl = AppConfiguration().baseURL()!//Fail early so that we know there is somthing wrong
     }
 
     /// Validates Simcard? ?????

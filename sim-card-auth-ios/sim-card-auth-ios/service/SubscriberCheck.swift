@@ -27,10 +27,17 @@ final class SubscriberCheck {
         // Show the results to the user
 
         let server = Server()
+
         server.retrieveSubscriberCheckURL(url: url) { (result) in
 
+            let subscriberCheckURL: String = ""
+
             let tru = TruSDK()
-            tru.openCheckUrl(url: "") { (data) in
+            tru.openCheckUrl(url: subscriberCheckURL) { (data) in
+
+                server.retrieveSubscriberCheckURL(url: url) { (checkResult) in
+                    handler(.success(0))
+                }
 
             }
         }
