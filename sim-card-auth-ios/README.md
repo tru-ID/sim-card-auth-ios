@@ -128,6 +128,7 @@ In order to read the plist we create struct called AppConfiguration, which deals
 
 ## How does the workflow run?
 
+Work in progress.
 
 
 ## Troubleshooting

@@ -5,6 +5,6 @@
 	<key>development_server_base_url</key>
 	<string>https://spotty-pig-91.loca.lt</string>
 	<key>production_server_base_url</key>
-	<string></string>
+	<string>https://eu.api.tru.id</string>
 </dict>
 </plist>

@@ -49,6 +49,14 @@
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="oPl-6e-9Be">
                                 <rect key="frame" x="188.5" y="210" width="37" height="37"/>
                             </activityIndicatorView>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.fill.checkmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Jfu-WA-Ne9">
+                                <rect key="frame" x="137" y="459.5" width="140" height="140.5"/>
+                                <color key="tintColor" systemColor="systemGreenColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="140" id="djz-rL-HZ6"/>
+                                    <constraint firstAttribute="height" constant="143.5" id="ytm-Zc-ZOv"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -60,6 +68,8 @@
                             <constraint firstItem="KdQ-wU-nme" firstAttribute="top" secondItem="PdV-Mh-APQ" secondAttribute="bottom" constant="84" id="QlD-bu-sh8"/>
                             <constraint firstItem="jmM-HG-zPr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="R7S-uA-fef"/>
                             <constraint firstItem="PdV-Mh-APQ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cZG-Ug-6Qu"/>
+                            <constraint firstItem="Jfu-WA-Ne9" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="e5J-gT-wtp"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Jfu-WA-Ne9" secondAttribute="bottom" constant="260.5" id="m8m-Q4-xiU"/>
                             <constraint firstItem="Kew-AR-bJl" firstAttribute="top" secondItem="KdQ-wU-nme" secondAttribute="bottom" constant="72" id="oGR-F0-HUG"/>
                             <constraint firstItem="Kew-AR-bJl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pdE-0f-0P6"/>
                             <constraint firstItem="jmM-HG-zPr" firstAttribute="top" secondItem="PdV-Mh-APQ" secondAttribute="bottom" constant="55" id="vtd-XQ-2nJ"/>
@@ -67,6 +77,7 @@
                     </view>
                     <connections>
                         <outlet property="busyActivityIndicator" destination="oPl-6e-9Be" id="e1r-5p-8Gr"/>
+                        <outlet property="checkResults" destination="Jfu-WA-Ne9" id="ELG-Eq-b9H"/>
                         <outlet property="nextButton" destination="Kew-AR-bJl" id="M1m-Nt-p4o"/>
                         <outlet property="phoneNumberTextField" destination="KdQ-wU-nme" id="PnQ-Q4-zGC"/>
                     </connections>
@@ -77,8 +88,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="person.fill.checkmark" catalog="system" width="128" height="88"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -26,6 +26,7 @@ final class Server<T: Decodable> {
                                handler: @escaping (Result<T, NetworkError>)-> Void) {
 
         let urlString = baseURL + path
+
         guard let url = URL(string: urlString) else {
             handler(.failure(.invalidURL))
             return
@@ -34,16 +35,26 @@ final class Server<T: Decodable> {
         let phoneNumberDict = ["phone_number" : phoneNumber]
 
         let session = createSession()
-        let urlRequest = createURLRequest(method: "POST",url: url, payload: phoneNumberDict)
+        let urlRequest = createURLRequest(method: "POST", url: url, payload: phoneNumberDict)
 
         makeRequest(session: session, urlRequest: urlRequest, handler: handler)
 
     }
 
     func retrieveSubscriberCheck(checkId: String, path: String,
-                                 handler: @escaping (Result<T, NetworkError>)-> Void) {//SubscriberCheckModel
+                                 handler: @escaping (Result<T, NetworkError>)-> Void) {
 
-        let urlString = baseURL + path
+        let urlString = baseURL + path + "/" + checkId
+
+        guard let url = URL(string: urlString) else {
+            handler(.failure(.invalidURL))
+            return
+        }
+
+        let session = createSession()
+        let urlRequest = createURLRequest(method: "GET", url: url, payload: nil)
+
+        makeRequest(session: session, urlRequest: urlRequest, handler: handler)
     }
 
     private func makeRequest(session: URLSession,
@@ -68,12 +79,10 @@ final class Server<T: Decodable> {
                 return
             }
 
-            print("Reponse: \(String(data: data, encoding: .utf8))")
+            print("Reponse: \(String(describing: String(data: data, encoding: .utf8)))")
 
             if let dataModel = try? JSONDecoder().decode(T.self, from: data) {
-                DispatchQueue.main.async {
                     handler(.success(dataModel))
-                }
                 return
             }
         }
@@ -91,14 +100,16 @@ final class Server<T: Decodable> {
         return URLSession(configuration: configuration)
     }
 
-    private func createURLRequest(method: String, url: URL, payload:[String : String])-> URLRequest {
+    private func createURLRequest(method: String, url: URL, payload:[String : String]?)-> URLRequest {
 
         var urlRequest = URLRequest(url: url)
         urlRequest.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
         urlRequest.httpMethod = method
 
-        let jsonData = try! JSONSerialization.data(withJSONObject: payload, options: .prettyPrinted)
-        urlRequest.httpBody = jsonData
+        if let payload = payload {
+            let jsonData = try! JSONSerialization.data(withJSONObject: payload, options: .prettyPrinted)
+            urlRequest.httpBody = jsonData
+        }
 
         return urlRequest
     }

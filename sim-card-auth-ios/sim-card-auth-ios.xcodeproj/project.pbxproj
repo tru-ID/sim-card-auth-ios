@@ -9,9 +9,8 @@
 /* Begin PBXBuildFile section */
 		F301133E25F3D43300F4B6F8 /* TruIdService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F301133D25F3D43300F4B6F8 /* TruIdService-Info.plist */; };
 		F301134425F3D4CB00F4B6F8 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F301134325F3D4CB00F4B6F8 /* AppConfiguration.swift */; };
-		F36DF40C25F3841400CD5421 /* SubscriberServicesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36DF40B25F3841400CD5421 /* SubscriberServicesProvider.swift */; };
 		F36DF41925F3AE1400CD5421 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36DF41825F3AE1400CD5421 /* Server.swift */; };
-		F36DF42225F3AE5C00CD5421 /* SubscriberCheckModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36DF42125F3AE5C00CD5421 /* SubscriberCheckModel.swift */; };
+		F36DF42225F3AE5C00CD5421 /* SubscriberCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36DF42125F3AE5C00CD5421 /* SubscriberCheck.swift */; };
 		F3BE64AF25ECE80F00CBAB40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BE64AE25ECE80F00CBAB40 /* AppDelegate.swift */; };
 		F3BE64B125ECE80F00CBAB40 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BE64B025ECE80F00CBAB40 /* SceneDelegate.swift */; };
 		F3BE64B325ECE80F00CBAB40 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BE64B225ECE80F00CBAB40 /* ViewController.swift */; };
@@ -21,7 +20,7 @@
 		F3BE64C625ECE81000CBAB40 /* sim_card_auth_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BE64C525ECE81000CBAB40 /* sim_card_auth_iosTests.swift */; };
 		F3BE64D125ECE81000CBAB40 /* sim_card_auth_iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BE64D025ECE81000CBAB40 /* sim_card_auth_iosUITests.swift */; };
 		F3BE64E325ECE83100CBAB40 /* TruSDK in Frameworks */ = {isa = PBXBuildFile; productRef = F3BE64E225ECE83100CBAB40 /* TruSDK */; };
-		F3BE65AB25F37B9A00CBAB40 /* SubscriberCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BE65AA25F37B9A00CBAB40 /* SubscriberCheck.swift */; };
+		F3BE65AB25F37B9A00CBAB40 /* SubscriberCheckService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BE65AA25F37B9A00CBAB40 /* SubscriberCheckService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,10 +43,9 @@
 /* Begin PBXFileReference section */
 		F301133D25F3D43300F4B6F8 /* TruIdService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TruIdService-Info.plist"; sourceTree = "<group>"; };
 		F301134325F3D4CB00F4B6F8 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
-		F36DF40B25F3841400CD5421 /* SubscriberServicesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberServicesProvider.swift; sourceTree = "<group>"; };
 		F36DF41025F3926F00CD5421 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F36DF41825F3AE1400CD5421 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
-		F36DF42125F3AE5C00CD5421 /* SubscriberCheckModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberCheckModel.swift; sourceTree = "<group>"; };
+		F36DF42125F3AE5C00CD5421 /* SubscriberCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberCheck.swift; sourceTree = "<group>"; };
 		F3BE64AB25ECE80F00CBAB40 /* sim-card-auth-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "sim-card-auth-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3BE64AE25ECE80F00CBAB40 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F3BE64B025ECE80F00CBAB40 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -64,7 +62,7 @@
 		F3BE64D225ECE81000CBAB40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F3BE64E925ECE96300CBAB40 /* SampleCode.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = SampleCode.xcconfig; sourceTree = "<group>"; };
 		F3BE64F125ECE9B200CBAB40 /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
-		F3BE65AA25F37B9A00CBAB40 /* SubscriberCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberCheck.swift; sourceTree = "<group>"; };
+		F3BE65AA25F37B9A00CBAB40 /* SubscriberCheckService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberCheckService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,19 +102,11 @@
 		F36DF41725F3ADFD00CD5421 /* service */ = {
 			isa = PBXGroup;
 			children = (
-				F36DF40B25F3841400CD5421 /* SubscriberServicesProvider.swift */,
-				F3BE65AA25F37B9A00CBAB40 /* SubscriberCheck.swift */,
+				F36DF42125F3AE5C00CD5421 /* SubscriberCheck.swift */,
+				F3BE65AA25F37B9A00CBAB40 /* SubscriberCheckService.swift */,
 				F36DF41825F3AE1400CD5421 /* Server.swift */,
 			);
 			path = service;
-			sourceTree = "<group>";
-		};
-		F36DF42025F3AE4B00CD5421 /* model */ = {
-			isa = PBXGroup;
-			children = (
-				F36DF42125F3AE5C00CD5421 /* SubscriberCheckModel.swift */,
-			);
-			path = model;
 			sourceTree = "<group>";
 		};
 		F3BE64A225ECE80F00CBAB40 = {
@@ -148,7 +138,6 @@
 				F3BE64AE25ECE80F00CBAB40 /* AppDelegate.swift */,
 				F3BE64B025ECE80F00CBAB40 /* SceneDelegate.swift */,
 				F3BE64B225ECE80F00CBAB40 /* ViewController.swift */,
-				F36DF42025F3AE4B00CD5421 /* model */,
 				F36DF41725F3ADFD00CD5421 /* service */,
 				F301134225F3D49600F4B6F8 /* util */,
 				F3BE64B725ECE81000CBAB40 /* Assets.xcassets */,
@@ -331,14 +320,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F36DF42225F3AE5C00CD5421 /* SubscriberCheckModel.swift in Sources */,
+				F36DF42225F3AE5C00CD5421 /* SubscriberCheck.swift in Sources */,
 				F3BE64B325ECE80F00CBAB40 /* ViewController.swift in Sources */,
 				F301134425F3D4CB00F4B6F8 /* AppConfiguration.swift in Sources */,
 				F3BE64AF25ECE80F00CBAB40 /* AppDelegate.swift in Sources */,
-				F3BE65AB25F37B9A00CBAB40 /* SubscriberCheck.swift in Sources */,
+				F3BE65AB25F37B9A00CBAB40 /* SubscriberCheckService.swift in Sources */,
 				F3BE64B125ECE80F00CBAB40 /* SceneDelegate.swift in Sources */,
 				F36DF41925F3AE1400CD5421 /* Server.swift in Sources */,
-				F36DF40C25F3841400CD5421 /* SubscriberServicesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,7 +506,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = TYCT88ZT59;
 				INFOPLIST_FILE = "sim-card-auth-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -539,7 +527,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = TYCT88ZT59;
 				INFOPLIST_FILE = "sim-card-auth-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

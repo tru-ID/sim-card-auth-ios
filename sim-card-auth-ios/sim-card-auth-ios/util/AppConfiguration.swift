@@ -25,7 +25,7 @@ struct AppConfiguration {
     func baseURL() -> String? {
         var key = "production_server_base_url"
         #if DEBUG
-        key = "staging_server_base_url"
+        key = "development_server_base_url"
         #endif
         return configuration?[key] as? String
     }
