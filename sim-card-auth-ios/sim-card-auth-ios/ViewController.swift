@@ -29,20 +29,20 @@ class ViewController: UIViewController {
 
         if !phoneNumber.isEmpty {
             //Ideally you should validated phone number against e164 spec
-            controls(shouldEnable:false)
+            controls(enabled:false)
             authProvider.validate(phoneNumber: phoneNumber) { [weak self] in
 
-                self?.controls(shouldEnable:true)
+                self?.controls(enabled:true)
             }
         }
 
     }
 
-    func controls(shouldEnable: Bool) {
-        shouldEnable ? busyActivityIndicator.stopAnimating() : busyActivityIndicator.startAnimating()
+    func controls(enabled: Bool) {
+        enabled ? busyActivityIndicator.stopAnimating() : busyActivityIndicator.startAnimating()
 
-        phoneNumberTextField.isEnabled = shouldEnable
-        nextButton.isEnabled = shouldEnable
+        phoneNumberTextField.isEnabled = enabled
+        nextButton.isEnabled = enabled
     }
 
 }
