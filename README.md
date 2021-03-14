@@ -1,16 +1,18 @@
 # SIM Card Based Mobile Authentication with iOS
 
-This sample iOS project will help you understand the steps you should follow to integrate**tru.ID**. [tru.ID](https://tru.id)  SubscriberCheck to you applications.
+This sample iOS project will help you perform your first SubscriberCheck with an iOS device and a sim card. You can follow the tutorial at [How to build ]understand the steps you should follow to integrate**tru.ID**. [tru.ID](https://tru.id)  SubscriberCheck to you applications.
 
 [![License][license-image]][license-url]
 
 
-## First Steps
-You will need:
+## Before you begin
+You will need to:
 
-- Apple Developer Account (so that you can run this demo app on a device)
-- An iOS phone with a SIM card and mobile data connection
-- [Xcode 12](https://developer.apple.com/xcode/)
+- Download  [Xcode 12](https://developer.apple.com/xcode/)
+- Register for a developer account at [Apple Developer Portal](https://developer.apple.com/account/) if you do not have one already
+- Have an iPhone or an iPad with a sim card
+- Have a data plan from your network Operator for your sim
+
 
 ## Getting Started
 
@@ -43,7 +45,7 @@ Take a note of the local tunnel URL, which will be need for configuring the samp
 The development server is now ready and waiting to accept calls from the app. Now, we need to download this repo, configure and run it through Xcode. 
 
 ## Clone the sample project repo
-Clone this repo:
+Open a new terminal and create a directory you want to download the sample project. The clone this repo by running the following command:
 
 ```bash
 $ git clone git@github.com:tru-ID/sim-card-auth-ios.git
@@ -66,21 +68,17 @@ Change the value of the ```development_server_base_url``` to the URL provided fr
 ...
 ```
 
-Then connect your phone to your computer, navigate to the scheme and select as target device and run the application. Make sure your device's mobile data is enabled (doesn't have to strictly on cellular network when running this app though) 
+## Build and Run
 
-Build and Run
+Then connect your phone to your computer, navigate to the scheme and select your device as the target device and select "Run". Xcode will build, install and launch your application. Make sure your device's mobile data is enabled (doesn't have to strictly on cellular network when running this app though).
 
 When the application launches,  enter the phone number which is associated with the sim card installed in the following format +{country_code}{number} e.g. `+447900123456`.  Tap "Verify my phone number" button and you will see the result of the check.
-
-// TODO Screenshot
 
 Tap Next
 
 Observer on the terminal that the calls from the application hits the development server.
 
-
-// TODO Screenshot
-
+Congragulations! You've completed your first **tru.ID** SubscriberCheck from an iOS application.
 
 Get in touch: please email [feedback@tru.id](mailto:feedback@tru.id) with any questions.
 
