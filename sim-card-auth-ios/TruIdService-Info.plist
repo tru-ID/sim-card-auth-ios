@@ -5,6 +5,6 @@
 	<key>development_server_base_url</key>
 	<string>https://spotty-pig-91.loca.lt</string>
 	<key>production_server_base_url</key>
-	<string>https://eu.api.tru.id</string>
+	<string>Base URL of Your Production Server Address should go here</string>
 </dict>
 </plist>
