@@ -1,29 +1,30 @@
 # SIM Card Based Mobile Authentication [with tru.ID]
 
 ## Overview
-The tru.ID SubscriberCheck provides a solution that offers both phone number verification and SIM checking. SIM Check Service provides information on when a SIM card associated with a mobile phone number was last changed. This can be used when augmenting existing 2FA or anti-fraud workflows.
-
-PhoneCheck on the other hand provides.
+**tru.ID** SubscriberCheck is a solution that offers both mobile phone number verification and SIM swap detection. SIM Check Service provides information on when a SIM card associated with a mobile phone number was last changed. This can be used when augmenting existing 2FA or anti-fraud workflows.
 
 SubscriberCheck simplifies and combines the functionality offered by both PhoneCheck and SIMCheck into a single product.
 
-## How to run this project?
+//TODO
+What is SubscriberCheck, how does it work and why should you care.
 
-### Step 1 - Have your fundamentals
-You will need to follow a few steps before you can run this sample app. If you have not done so;
+## Building an iOS app with SubscriberCheck
+
+### Step 1 - Foundations
+You will need to follow a few steps before you can build the application. If you have not done so;
 - Download  [Xcode 12](https://developer.apple.com/xcode/)
 - Register for developer account at [Apple Developer Portal](https://developer.apple.com/account/)
 - Have an iPhone or an iPad with a sim card
 - Have a data plan from your Network Operator
 
-Xcode and this sample project will take care of generating necessariy certificates and provisioning profiles in order to install the app on the device.
+Xcode will take care of generating necessariy certificates and provisioning profiles in order to install the app on the device.
 
 ### Step 2 - Set-up tru.ID CLI and run a development server
-For us to run the Subcriber Check workflow, you will also need to install [**tru.ID** CLI](https://github.com/tru-ID/cli)  and run a Node.js development server.
+For us to run the SubcriberCheck workflow, you will also need to install [**tru.ID** CLI](https://github.com/tru-ID/cli) and run a Node.js development server.
 
 The CLI helps you create a local development server on your machine. It opens up a local tunnel to this server and making it publicly accessible over the Internet. This will allow your mobile phone to access this server when connected only through cellular data. 
 
-First sign up for a [**tru.ID** account](https://developer.tru.id/signup) account, and do not forget to note down your Client Id, Client Secret and Data Residency information. The account comes with some free credits, so you can use it for testing your app against the production environment when it is ready.
+First sign up for a [**tru.ID** account](https://developer.tru.id/signup) account. The account comes with some free credits, so you can use it for testing your app against the production environment when it is ready.
 
 Download and install [**Node.js**](https://nodejs.org/en/download/) if you do not have it already. After installing Node.js, use the following terminal command to install [**tru.ID** CLI](https://github.com/tru-ID/cli):
 
@@ -31,7 +32,7 @@ Download and install [**Node.js**](https://nodejs.org/en/download/) if you do no
 $ npm install -g @tru_id/cli
 ```
 
-Run `tru setup:credentials` command using the credentials you have noted before from the [**tru.ID** console](https://developer.tru.id/console):
+Run `tru setup:credentials` command using the command you can copy from the [**tru.ID** console](https://developer.tru.id/console):
 
 ```bash
 $ tru setup:credentials {client_id} {client_secret} {data_residency}
@@ -59,28 +60,6 @@ $ tru server -t --project-dir ./iosauthdemoserver
 
 Check URL that is shown in the terminal using your web browser and see if you it is accessible. The URL will be in the format `https://{subdomain}.loca.lt`.
 
-### Step 3 - Configure the project and run
-The development server is now ready waiting to accept the calls from the app you will be running through Xcode. Now, we need add the url you see on the console to a configuration file in the project.
-
-Open the project using Xcode
-
-Find the `TruIdService-Info.plist`
-
-Change the value of the `` to the URL provides from the terminal.
-
-Connect your device to you machine.
-
-Select your device on the active Scheme
-
-Make sure your device's mobile data is enabled (doesn't have to strictly on cellular network when running this app though) 
-
-Build and Run
-
-When the application launches, enter your phone number which is associated with the sim card
-
-Tap Next
-
-Observer on the terminal that the calls from the application hits the development server.
 
 
 ## Getting **tru.ID** integrated with your iOS application
