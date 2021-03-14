@@ -1,21 +1,20 @@
 # SIM Card Based Mobile Authentication with iOS
 
-How to Add SIM Card Based Mobile Authentication to your iOS App with [tru.ID](https://tru.id).
+This sample iOS project will help you understand the steps you should follow to integrate**tru.ID**. [tru.ID](https://tru.id)  SubscriberCheck to you applications.
 
 [![License][license-image]][license-url]
 
 
-## Before you being
-
+## First Steps
 You will need:
 
 - Apple Developer Account (so that you can run this demo app on a device)
 - An iOS phone with a SIM card and mobile data connection
-- iOS capable IDE e.g. [Xcode 12](https://developer.apple.com/xcode/)
+- [Xcode 12](https://developer.apple.com/xcode/)
 
 ## Getting Started
 
-Install the [tru.ID CLI]() and set it up using the command provided in the [tru.ID console](https://developer.tru.id/console):
+Before you can start running the sample project, there are few things you should to set-up. First, you need to install the [tru.ID CLI](https://developer.tru.id/). This will help you create a development server up and running, which the sample app will be using to accomplish the necessary steps for SubscriberCheck set it up using the command provided in the [tru.ID console](https://developer.tru.id/console):
 
 ```bash
 $ tru setup:credentials {client_id} {client_secret} {data_residency}
@@ -39,26 +38,51 @@ Run the development server and take a note of the local tunnel URL:
 $ tru server --project-dir ./authsome-ios
 ```
 
-Clone or this repo:
+Take a note of the local tunnel URL, which will be need for configuring the sample project. 
+
+The development server is now ready and waiting to accept calls from the app. Now, we need to download this repo, configure and run it through Xcode. 
+
+## Clone the sample project repo
+Clone this repo:
 
 ```bash
 $ git clone git@github.com:tru-ID/sim-card-auth-ios.git
 ```
 
-Open the project with your Xcode.
 
-Add configuration to identify the local tunnel URL of the development server  in `tru-id.plist` :
+## Configure the project
+Now, we need add the local tunnel url you see on the terminal to a configuration file in the project.
+
+Open the project using Xcode
+
+Find the `TruIdService-Info.plist`
+
+Change the value of the ```development_server_base_url``` to the URL provided from the terminal.
 
 ```
-LOCAL_SERVER_BASE_URL="https://local.tru.com"
+...
+<key>development_server_base_url</key>
+<string>https://spotty-pig-12342.loca.lt</string>
+...
 ```
 
-Connect your phone to your computer so it's used for running the application and run the application from your IDE.
+Then connect your phone to your computer, navigate to the scheme and select as target device and run the application. Make sure your device's mobile data is enabled (doesn't have to strictly on cellular network when running this app though) 
 
-Enter the phone number for the mobile device in the UI in the following format +{country_code}{number} e.g. `+447900123456`.  Tap "Verify my phone number" button and you will see the result of the check.
+Build and Run
+
+When the application launches,  enter the phone number which is associated with the sim card installed in the following format +{country_code}{number} e.g. `+447900123456`.  Tap "Verify my phone number" button and you will see the result of the check.
+
+// TODO Screenshot
+
+Tap Next
+
+Observer on the terminal that the calls from the application hits the development server.
+
+
+// TODO Screenshot
+
 
 Get in touch: please email [feedback@tru.id](mailto:feedback@tru.id) with any questions.
-
 
 ## References
 
