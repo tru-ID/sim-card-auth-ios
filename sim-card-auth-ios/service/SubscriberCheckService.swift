@@ -9,7 +9,7 @@ import Foundation
 import TruSDK
 
 /**
- This class helps accomplish Subscriber Check.
+ This class implements the SubscriberCheck workflow.
 
  # For a detailed integration of [subscriber check workflow](https://developer.tru.id/docs/subscriber-check/integration). Here are the steps:
  - Make a POST request to the application server (see initial set-up in README.md). This call can be made over any type of network (cellular/wifi). The application server should return SubscriberCheck URL.
@@ -22,32 +22,32 @@ protocol Subscriber {
 
 final class SubscriberCheckService {
 
-    //?? API documentation and Node.js endpoints and call conventions are slightly different
-    // Node.js forwards to https://eu.api.tru.id/subscriber_check/v0.1/checks
+    // Note that Node.js development server API documentation and **tru.ID** call conventions are slightly different
+    // Development server forwards requests to https://eu.api.tru.id/subscriber_check/v0.1/checks
     // Response is strip down as well.
-    let endpoint = "/subscriber-check"
+    // Your production server may have a different endpoint, and response model.
+    let path = "/subscriber-check"
     let baseUrl: String
-    let server: Server<SubscriberCheck>
+    let endpoint: Endpoint<SubscriberCheck>
     
     init() {
         var configuration = AppConfiguration()
         configuration.loadServerConfiguration()
         baseUrl = configuration.baseURL()!//Fail early so that we know there is something wrong
-        server = Server<SubscriberCheck>(withBaseURL: baseUrl)
+        endpoint = Endpoint<SubscriberCheck>(withBaseURL: baseUrl)
     }
 
-    /// Initiates the Subscriber Check workflow and calls the closure for success/failure
+    /// Initiates the SubscriberCheck workflow and calls the closure for success/failure
     /// - Parameters:
     ///   - phoneNumber: e164 confirming phone number
     ///   - handler: closure to execute either on success or failure scenarios for the validation results
-    func check(phoneNumber: String, handler: @escaping (Result<SubscriberCheck, NetworkError>)-> Void) {
+    func check(phoneNumber: String, handler: @escaping (Result<SubscriberCheck, NetworkError>) -> Void) {
 
-        server.createSubscriberCheck(withPhoneNumber: phoneNumber, path: endpoint) { (result) in
-
+        self.createSubscriberCheck(phoneNumber: phoneNumber) { (createResult) in
             var checkURL = ""
             var checkID = ""
 
-            switch result {
+            switch createResult {
             case .success(let subscriberCheck):
                 // The server returns the SubscriberCheck results to the device.
                 checkURL = subscriberCheck.check_url!
@@ -66,22 +66,60 @@ final class SubscriberCheckService {
                 }
 
                 print("SDK successfully returned, let's call our server to retrieve check results.")
-                self.server.retrieveSubscriberCheck(checkId: checkID, path: self.endpoint) { (result) in
-                    switch result {
-                    case .success(let checkResult):
-                        handler(.success(checkResult))
+                self.retrieveSubscriberCheck(checkId: checkID) { (checkResult) in
+                    switch checkResult {
+                    case .success(let checkResultModel):
+                        handler(.success(checkResultModel))
                     case .failure(let error):
                         handler(.failure(error))
                     }
 
                 }
             }
-
         }
 
     }
+    
+    private func createSubscriberCheck(phoneNumber: String,
+                                         handler: @escaping (Result<SubscriberCheck, NetworkError>) -> Void) {
+        let urlString = baseUrl + path
 
-    private func requestSubscriberCheckURL(subscriberCheckURL: String, handler: @escaping ()-> Void) {
+        guard let url = URL(string: urlString) else {
+            handler(.failure(.invalidURL))
+            return
+        }
+
+        let phoneNumberDict = ["phone_number" : phoneNumber]
+        let urlRequest = endpoint.createURLRequest(method: "POST", url: url, payload: phoneNumberDict)
+        endpoint.makeRequest(urlRequest: urlRequest, handler: handler)
+    }
+    
+    /// Retrieves the results of a SubscriberCheck given a check Id
+    /// - Parameters:
+    ///   - checkId: Check id receives when you created the SubscriberCheck @link createSubscriberCheck
+    ///   - handler: callback
+    private func retrieveSubscriberCheck(checkId: String,
+                                         handler: @escaping (Result<SubscriberCheck, NetworkError>) -> Void) {
+
+        let urlString = baseUrl + path + "/" + checkId
+
+        guard let url = URL(string: urlString) else {
+            handler(.failure(.invalidURL))
+            return
+        }
+
+        let urlRequest = endpoint.createURLRequest(method: "GET", url: url, payload: nil)
+
+        endpoint.makeRequest(urlRequest: urlRequest, handler: handler)
+    }
+
+    
+    /// Note that this call will made over the celluler network
+    /// - Parameters:
+    ///   - subscriberCheckURL: URL that you received from **your** (development/production) server
+    ///   - handler: callback on the results of the call
+    private func requestSubscriberCheckURL(subscriberCheckURL: String,
+                                           handler: @escaping () -> Void) {
 
         let tru = TruSDK()
 

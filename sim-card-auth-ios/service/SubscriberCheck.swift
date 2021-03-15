@@ -7,7 +7,7 @@
 
 import Foundation
 
-// Response model https://developer.tru.id/docs/reference/api#operation/create-subscriber-check
+// Response model based on https://developer.tru.id/docs/reference/api#operation/create-subscriber-check
 struct SubscriberCheck: Codable {
     let check_id: String?
     let check_url: String?

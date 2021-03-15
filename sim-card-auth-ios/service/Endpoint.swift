@@ -14,53 +14,19 @@ enum NetworkError: Error {
     case noData
 }
 
-final class Server<T: Decodable> {
+final class Endpoint<T: Decodable> {
 
     let baseURL: String
+    let session: URLSession
 
     init(withBaseURL url: String) {
         baseURL = url
+        session = Endpoint.createSession()
     }
 
-    func createSubscriberCheck(withPhoneNumber phoneNumber: String, path: String,
-                               handler: @escaping (Result<T, NetworkError>)-> Void) {
-
-        let urlString = baseURL + path
-
-        guard let url = URL(string: urlString) else {
-            handler(.failure(.invalidURL))
-            return
-        }
-
-        let phoneNumberDict = ["phone_number" : phoneNumber]
-
-        let session = createSession()
-        let urlRequest = createURLRequest(method: "POST", url: url, payload: phoneNumberDict)
-
-        makeRequest(session: session, urlRequest: urlRequest, handler: handler)
-
-    }
-
-    func retrieveSubscriberCheck(checkId: String, path: String,
-                                 handler: @escaping (Result<T, NetworkError>)-> Void) {
-
-        let urlString = baseURL + path + "/" + checkId
-
-        guard let url = URL(string: urlString) else {
-            handler(.failure(.invalidURL))
-            return
-        }
-
-        let session = createSession()
-        let urlRequest = createURLRequest(method: "GET", url: url, payload: nil)
-
-        makeRequest(session: session, urlRequest: urlRequest, handler: handler)
-    }
-
-    private func makeRequest(session: URLSession,
-                     urlRequest: URLRequest,
-                     handler: @escaping (Result<T, NetworkError>)-> Void) {
-
+    func makeRequest(urlRequest: URLRequest,
+                     handler: @escaping (Result<T, NetworkError>) -> Void) {
+        
         let task = session.dataTask(with: urlRequest) { (data, response, error) in
 
             if let error = error {
@@ -90,7 +56,7 @@ final class Server<T: Decodable> {
         task.resume()
     }
 
-    private func createSession()-> URLSession {
+    private static func createSession() -> URLSession {
 
         let configuration = URLSessionConfiguration.ephemeral //We do not want OS to cache or persist
         configuration.allowsCellularAccess = true
@@ -100,7 +66,7 @@ final class Server<T: Decodable> {
         return URLSession(configuration: configuration)
     }
 
-    private func createURLRequest(method: String, url: URL, payload:[String : String]?)-> URLRequest {
+    func createURLRequest(method: String, url: URL, payload:[String : String]?) -> URLRequest {
 
         var urlRequest = URLRequest(url: url)
         urlRequest.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
