@@ -90,9 +90,9 @@ Let's add the **tru.Id** [iOS SDK](https://github.com/tru-ID/tru-sdk-ios) first.
 #### Using Swift Package Manager
 Xcode integrates well with Github, and you can add Swift Packages very easily. In your Xcode, go to File -> Swift Packages -> Add Package Dependency...
 
-Type `git@github.com:tru-ID/tru-sdk-ios.git`, and tap Next.
+Type `https://github.com/tru-ID/tru-sdk-ios.git`, and tap Next.
 
-Xcode should be able to find the package. Check the correct version is selected.
+Xcode should be able to find the package. Check the correct package version is selected.
 
 Now that the SDK is added, we can import it when we are implementing the workflow.
 
