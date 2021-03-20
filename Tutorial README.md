@@ -423,7 +423,7 @@ final class SubscriberCheckService: Subscriber {
     }
 }
 ```
-`SubscriberCheckService` uses a concrete implementation of `Endpoint` protocol. In our case, this is `SessionEndpoint` which defined in the previous sections. This class will help us execute our network requests.
+`SubscriberCheckService` uses a concrete implementation of `Endpoint` protocol. In our case, this is `SessionEndpoint` which defined in the previous sections. This class will make our life easy to execute the part of the workflow which requires making network requests.
 
 It is time talk about the SubscriberCheck workflow before we dive into the coding. The workflow has 3 steps:
 
@@ -431,13 +431,126 @@ It is time talk about the SubscriberCheck workflow before we dive into the codin
 - Request the SubscriberCheck URL using the **tru.ID** iOS SDK
 - Retrieve the SubscriberCheck Results
 
-The following sequence diagram show each step.
+The following sequence diagram shows each step.
 
 ![SubscriberCheck Workflow](tutorial-images/workflow.png)
 
-#### Create a SubscriberCheck
-#### Request the SubscriberCheck URL using the **tru.ID** iOS SDK
-#### Retrieve the SubscriberCheck Results
+Let's first define 3 methods which will help us stitch the above steps.
+
+First, we need to make a POST request to the development/production server [see initial set-up](#set-up-truid-cli-and-run-a-development-server). This call can be made over any type of network (cellular/wifi). The  server should return a SubscriberCheck URL. Add the following method to the `SubscriberCheckService` class.
+
+```swift
+
+private func createSubscriberCheck(phoneNumber: String,
+                                     handler: @escaping (Result<SubscriberCheck, NetworkError>) -> Void) {
+    let urlString = endpoint.baseURL + path
+
+    guard let url = URL(string: urlString) else {
+        handler(.failure(.invalidURL))
+        return
+    }
+
+    let phoneNumberDict = ["phone_number" : phoneNumber]
+    let urlRequest = endpoint.createURLRequest(method: "POST", url: url, payload: phoneNumberDict)
+    endpoint.makeRequest(urlRequest: urlRequest, handler: handler)
+}
+
+```
+This method receives a phone number, constructs the full URL using the baseURL and the subcriber check path which is defined by the development server. Again note that this may be different for you. It is up to you to define who your production REST API will be.
+
+Then we create a payload (simply the phone number), and create a `URLRequest` using the `endpoint.createURLRequest(..)` method. And then we use the `makeRequest(..)` method of the endpoint and pass the `urlRequest` and the handler.
+
+We need to request the URL which will be returned by the `createSubscriberCheck(..)`. However, this call needs to be made by the **tru-ID** SDK. Let's create a helper method called `requestSubscriberCheckURL(..)`:
+
+```swift
+private func requestSubscriberCheckURL(subscriberCheckURL: String,
+                                       handler: @escaping () -> Void) {
+
+    let tru = TruSDK()
+
+    tru.openCheckUrl(url: subscriberCheckURL) { (something) in
+        handler()
+    }
+}
+```
+Do not forget to import the `TruSDK`.
+
+```swift
+import TruSDK
+```
+The SDK will ensure that this call will be made over the cellular network. When the `openCheckUrl(..)` calls the closure, we call the `handler` as well.
+
+In order to help us on the third steps, we need to define one more method called `retrieveSubscriberCheck(..)` as follows:
+
+```swift
+private func retrieveSubscriberCheck(checkId: String,
+                                     handler: @escaping (Result<SubscriberCheck, NetworkError>) -> Void) {
+
+    let urlString = endpoint.baseURL + path + "/" + checkId
+
+    guard let url = URL(string: urlString) else {
+        handler(.failure(.invalidURL))
+        return
+    }
+
+    let urlRequest = endpoint.createURLRequest(method: "GET", url: url, payload: nil)
+
+    endpoint.makeRequest(urlRequest: urlRequest, handler: handler)
+}
+```
+Very similar to the first method we defined, with only a few differences. Note that we are calling our endpoint with a extrac `checkId` parameter, and this time it is a GET call.
+
+Now let's stitch and chain them together in our `Subscriber` protocol implementation.
+
+```swift
+
+public func check(phoneNumber: String, handler: @escaping (Result<SubscriberCheck, NetworkError>) -> Void) {
+
+    self.createSubscriberCheck(phoneNumber: phoneNumber) { (createResult) in
+        var checkURL = ""
+        var checkID = ""
+
+        switch createResult {
+        case .success(let subscriberCheck):
+            // The server returns the SubscriberCheck results to the device.
+            checkURL = subscriberCheck.check_url!
+            checkID = subscriberCheck.check_id!
+            print("Got the subscriber check URL: \(String(describing: subscriberCheck.check_url)) ")
+        case .failure(let error):
+            handler(.failure(error))
+            return
+        }
+
+        print("Using the SDK to request check URL over mobile network")
+        self.requestSubscriberCheckURL(subscriberCheckURL: checkURL) { [weak self] in
+
+            guard let self = self else {
+                return
+            }
+
+            print("SDK successfully returned, let's call our server to retrieve check results.")
+            self.retrieveSubscriberCheck(checkId: checkID) { (checkResult) in
+                switch checkResult {
+                case .success(let checkResultModel):
+                    handler(.success(checkResultModel))
+                case .failure(let error):
+                    handler(.failure(error))
+                }
+
+            }
+        }
+    }
+
+}
+```
+
+First, we are making a call using the `self.createSubscriberCheck(phoneNumber: phoneNumber) ...` method. The callback to this method, inspects the `Result<>`. It it is a success, fetches the `checkURL` and `checkID` and stores them in local variables which will be used later.
+
+The second step is to use tru.ID iOS SDK to make call to SubscriberCheck URL. The SDK will make this call over the mobile network. The user must have data plan. Behind the scenes this call will redirect, and eventually return OK. All will be handled by the SDK.
+
+The third steps is to make a final request the server using the check Id that we got as a result of making the first call. This call will return the Subscriber Check information; whether the check is successful or not.
+
+You can find more on the **tru.ID** [subscriber check workflow integration](https://developer.tru.id/docs/subscriber-check/integration).
 
 ### Implement the User Action
 At this point, we have our UI and we have necessary code to execute the SubscriberCheck workflow. This is where we put the final touches and get the View layer interact with the use case.
@@ -499,12 +612,15 @@ If the workflow executes successfully then we access model details and reconfigu
 
 In order to understand if we validated the phone number we need to inspect the `.success` payload which is of type `SubscriberCheck`. The following line will ensure that validation results are reflected on the UI:
 
-``self?.configureCheckResults(match: subscriberCheck.match ?? false, noSimChange: subscriberCheck.no_sim_change ?? false)``
+```swift
+self?.configureCheckResults(match: subscriberCheck.match ?? false, noSimChange: subscriberCheck.no_sim_change ?? false)
+```
 
 In any case, we restore the UI controls back to their original state so that the user can reexecute the workflow with the following code:
 
-``self?.controls(enabled:true)``
-
+```swift
+self?.controls(enabled:true)
+```
 
 ### "Run Forest, Run!"
 Now that our code is complete, you can run the application on a real device. Bear in mind that SIM card based authentication is not be possible on a Simulator as you require a SIM Card.

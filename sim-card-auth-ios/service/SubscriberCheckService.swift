@@ -34,6 +34,8 @@ final class SubscriberCheckService: Subscriber {
         self.endpoint = SessionEndpoint()
     }
 
+    // MARK: Subscriber protocol
+    
     /// Initiates the SubscriberCheck workflow and calls the closure for success/failure
     /// - Parameters:
     ///   - phoneNumber: e164 confirming phone number
@@ -121,9 +123,7 @@ final class SubscriberCheckService: Subscriber {
         let tru = TruSDK()
 
         tru.openCheckUrl(url: subscriberCheckURL) { (something) in
-            //Are we assuming success here?SDK doesn't tell us what the call means?
             handler()
-
         }
     }
 
