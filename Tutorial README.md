@@ -116,6 +116,7 @@ There are a couple of configuration you may want to do for these UI components.
 
 - Text field: Select the text field, and on the Attributes Inspector, scroll to `Text Input Traits` and change the `Content Type` to `Telephone Number`. Also it would be a good idea to change the `Keyboard Type` to `Phone Pad`.
 - Activity indicator: Select the activity indicator, and on the Attributes Inspector check `Hides When Stopped`
+- UIImageView: Select the UIImageView, and on the Attributes Inspector, scroll to Drawing, and check `Hidden`
 
 Now, we need to define our Outlets in the ViewController so that we can control the UI state. Let's select `ViewController` in Xcode, and then by using the `⌥` select `Main.storyboard` file. Both `ViewController.swift` and `Main.stroyboard` should be opened side by side.
 
@@ -353,6 +354,8 @@ The `init()` method of the class loads a base URL from the `AppConfiguration` wh
 
 The rest of the file contains the `Endpoint` protocol implementation. First method `makeRequest<>..` creates a data task using the URLRequest provided and initates the call. When the reponse is received, the method calls the `handler` closure for success or failure cases. If data exists and there are no error scenarios, then it attempts to decode the data to the model type provided.
 
+`Result<>` generic type refers to a model object and an `Enum` which provides error cases. Fairly simple.
+
 The `createURLRequest(..)` method receives three parameters; HTTP method name, the URL and an optional payload if the request is a POST request, for instance. The method returns a `URLRequest` object, which is then used by the `makeRequest<>..` method during the execution of the workflow.
 
 There is nothing extra-ordinary going on.
@@ -394,27 +397,119 @@ struct Links: Codable {
 Note that, we are using the response model provided by the **tru-ID** [REST API](https://developer.tru.id/docs/reference/api#operation/create-subscriber-check) documentation as basis for this struct. In a real life scenarios, your architecture and production servers may expose a different REST response model. It is for you to decide. It is important that `SubscriberCheck` implements the `Codable` protocol as this will help `JSONSerialization.data(..)` decode the json response to the `SubscriberCheck` easily. 
 
 ### Implement the Use Case and the Workflow
-Now that we have defined the UI interface and the Network reques/response mechanics, let's bridge the two and implement our business logic. In this section, we will define a protocol for our primary use case, and implement the workflow. Ultimately, the UI layer of our application is concern about what the user is going to request. At this layer, we shouldn't be concerned about "How" it is going to be done. Since we are only concerned with SubscriberCheck, a simple `Subscriber` protocol which defines a function to receive a phone number and provide a closure for the SubscriberCheck results should be sufficient. 
+Now that we have defined the user interface and defined the network request/response mechanics, let's bridge the two and implement our business logic. In this section, we will define a protocol for our primary use case, and implement the SubscriberCheck workflow. Ultimately, the View layer of our application is concern about what the user is going to request. At this layer, we shouldn't be concerned about "How" it is going to be done. Since we are only concerned with SubscriberCheck, a simple `Subscriber` protocol which defines a function to receive a phone number and provide a closure for the SubscriberCheck results should be sufficient. 
 
 Create Swift file in the `service` group called `SubscriberCheckService.swift`. In this file, define the `Subscriber` protocol as the following:
 
 ```
 protocol Subscriber {
     func check(phoneNumber: String,
-               handler: @escaping (Result<SubscriberCheck, NetworkError>)-> Void)
+               handler: @escaping (Result<SubscriberCheck, NetworkError>) -> Void)
 }
 
 ```
-`Result<>` generic type refers to a model object and an `Enum` which provides error cases. Fairly simple. Now let's look 
 
+We will later define a variable of `Subscriber` type in our `ViewController.swift` later. This is how the View layer will talk to the Model layer.
+
+Now we are ready to implement the business logic. Create a class called `SubscriberCheckService` in the `SunscriberCheckService` which implements the `Subscriber` protocol.
+
+```
+final class SubscriberCheckService: Subscriber {
+    let path = "/subscriber-check"
+    let endpoint: Endpoint
+        
+    init(){
+        self.endpoint = SessionEndpoint()
+    }
+}
+```
+`SubscriberCheckService` uses a concrete implementation of `Endpoint` protocol. In our case, this is `SessionEndpoint` which defined in the previous sections. This class will help us execute our network requests.
+
+It is time talk about the SubscriberCheck workflow before we dive into the coding. The workflow has 3 steps:
+
+- Create a SubscriberCheck
+- Request the SubscriberCheck URL using the **tru.ID** iOS SDK
+- Retrieve the SubscriberCheck Results
+
+The following sequence diagram show each step.
+
+![SubscriberCheck Workflow](tutorial-images/workflow.png)
+
+#### Create a SubscriberCheck
+#### Request the SubscriberCheck URL using the **tru.ID** iOS SDK
+#### Retrieve the SubscriberCheck Results
 
 ### Implement the User Action
-At this point we have our UI and we have necessary code to execute the SubscriberCheck workflow. This is where we put the final touches.
+At this point, we have our UI and we have necessary code to execute the SubscriberCheck workflow. This is where we put the final touches and get the View layer interact with the use case.
+
+Let's first define a variable of `Subscriber` type in our `ViewController` and then implement the `next(_ sender: Any)` IBAction. Add the following code to your view controller.
+
+```
+var subscriberService: Subscriber!
+
+override func viewDidLoad() {
+    super.viewDidLoad()
+    subscriberService = SubscriberCheckService()
+}
+
+```
+We initialise our `subscriberService` with a concrete implementation `SubscriberCheckService` which we defined in the previous section. `SubscriberCheckService` knows how to execute the workflow and all `ViewController` needs to do is to call `check(phoneNumber: String, ..)` and control the UI state. It is time to implement the `next(_ sender: Any)`. It will look as follows:
+
+```
+@IBAction func next(_ sender: Any) {
+
+    guard var phoneNumber = phoneNumberTextField.text else {
+        return
+    }
+
+    if !phoneNumber.isEmpty {
+        // Ideally you should validated phone number against e164 spec
+        // Without leading + or 0's
+        // For example: {country_code}{number}, 447940448591
+        // Remove double 00's
+        if let range = phoneNumber.range(of: "00") {
+            phoneNumber.replaceSubrange(range, with: "")
+        }
+
+        controls(enabled: false)
+
+        subscriberService.check(phoneNumber: phoneNumber) { [weak self] (checkResult) in
+
+            DispatchQueue.main.async {
+                switch checkResult {
+                case .success(let subscriberCheck):
+                    self?.configureCheckResults(match: subscriberCheck.match ?? false, noSimChange: subscriberCheck.no_sim_change ?? false)
+                case .failure(let error):
+                    print("\(error)")
+                }
+                self?.controls(enabled:true)
+            }
+
+        }
+    }
+
+}
+
+```
+The implementation of the method first checks whether there is text in the `phoneNumberTextField` and if it is empty or not. Note that in a production code, you should validate that the phone number entered by the user obey the e164 specification. We are keeping it simple for the purposes of this tutorial, and only removing `00` from the begining of the phone number if exists.
+
+The second step is to disable parts of the user interface, show the activity indicator and let it spin. The third step is to call the `check(phoneNumber:)` method of the `subscriberService`. The handler will provide a `checkResult` which is a type of `Result<SubscriberCheck,NetworkError>`.  Note that this closure will not be called in the main queue, therefore we need to wrap any code which accesses UIKit entities in a `DispatchQueue.main.async`.
+
+If the workflow executes successfully then we access model details and reconfigure the UI. Not that the `.success` case doesn't necessarily mean that validation is successful, it is simply an indication that workflow executed without encountering any network errors.
+
+In order to understand if we validated the phone number we need to inspect the `.success` payload which is of type `SubscriberCheck`. The following line will ensure that validation results are reflected on the UI:
+
+``self?.configureCheckResults(match: subscriberCheck.match ?? false, noSimChange: subscriberCheck.no_sim_change ?? false)``
+
+In any case, we restore the UI controls back to their original state so that the user can reexecute the workflow with the following code:
+
+``self?.controls(enabled:true)``
 
 
 ### Run Forest, Run!
+Now that our code is complete, you can run the application on a real device. Bear in mind that SIM card based authentication is not be possible on a Simulator as you require a SIM Card.
 
-//Some Video
+//Video
 
 
 ## Troubleshooting

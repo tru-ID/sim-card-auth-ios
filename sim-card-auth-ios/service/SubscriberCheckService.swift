@@ -18,10 +18,10 @@ import TruSDK
  */
 protocol Subscriber {
     func check(phoneNumber: String,
-               handler: @escaping (Result<SubscriberCheck, NetworkError>)-> Void)
+               handler: @escaping (Result<SubscriberCheck, NetworkError>) -> Void)
 }
 
-final class SubscriberCheckService {
+final class SubscriberCheckService: Subscriber {
 
     // Note that **tru.ID** CLI Node.js development server API and call conventions are slightly different.
     // i.e Response is strip down.
@@ -126,9 +126,5 @@ final class SubscriberCheckService {
 
         }
     }
-
-}
-
-extension SubscriberCheckService: Subscriber {
 
 }
