@@ -3,17 +3,14 @@
 ## Overview
 **tru.ID** [SubscriberCheck](https://developer.tru.id/docs/subscriber-check) is a solution that offers both mobile phone number verification and SIM swap detection. SubscriberCheck achieves this by combining the workflows of [PhoneCheck](https://developer.tru.id/docs/phone-check) Service, which confirms the ownership of a mobile phone number by verifying the possession of an active SIM card with the same number and also with [SIMCheck](https://developer.tru.id/docs/sim-check) Service provides information on when a SIM card associated with a mobile phone number was last changed. 
 
-SubscriberCheck Service is a great way to simply and combine two services under one workflow. This can be used when augmenting existing 2FA or anti-fraud workflows.
+SubscriberCheck service is a great way to simply and combine two services under one workflow. This can be used when augmenting existing 2FA or anti-fraud workflows.
 
-In this tutorial, we will walk you through how to build a simple iOS application which integrates **tru.ID** [SubscriberCheck](https://developer.tru.id/docs/subscriber-check) Service to streghten your application's authentication workflow.
-
-The completed sample app can be found in the **tru.ID** [sim-card-auth-ios][https://github.com/tru-ID/sim-card-auth-ios/] Github repository.
-
+In this tutorial, we will walk you through how to build a simple iOS application which integrates **tru.ID** [SubscriberCheck](https://developer.tru.id/docs/subscriber-check) service to streghten your application's authentication workflow.
 
 ## Building an iOS app with SubscriberCheck
 
 ### Prerequisites
-If you have not done so already;
+If you have not done already;
 
 - Download  [Xcode 12](https://developer.apple.com/xcode/)
 - Register for developer account at [Apple Developer Portal](https://developer.apple.com/account/)
@@ -21,7 +18,7 @@ If you have not done so already;
 - Have a data plan from your Network Operator
 
 
-For you to integrate **tru.ID** with your own applications, you will also need:
+In order to integrate **tru.ID** with your own applications, you will also need:
 - Knowledge of Swift language
 - Experience with iOS application development 
 - Experience with Xcode
@@ -36,7 +33,7 @@ Using the CLI, we will create a Node.js development server on our machines. This
 
 It will act as a proxy in the middle between your mobile app and the **tru.ID** servers. This architecture and the development server nicely hides the complexities involved in developing a middle layer and reduces mobile application development times significantly.
 
-Your production architecture should mirror this cleint/server architecture (but may be not exactly the API) with your servers implementing necessary steps to perform on behalf of the mobile application. See [SubscriberCheck Workflow Integration](https://developer.tru.id/docs/subscriber-check/integration) to details.
+Your production architecture should mirror this cleint/server architecture (but may not be the same API) with your servers implementing necessary steps to perform on behalf of the mobile application. See [SubscriberCheck Workflow Integration](https://developer.tru.id/docs/subscriber-check/integration) to details.
 
 Ok, enough of background. Let's do it.
 
@@ -78,18 +75,17 @@ Check that the URL that is shown in the terminal is accessible by using your web
 
 
 ### Create an iOS Project
-If you have come this far,  you have created a **tru.ID** account and a development server set-up and running. Great! Let's crack on with the application. You can skip this step if you already have an iOS project. 
-Otherwise;
+If you have come this far,  you have created a **tru.ID** account and a development server set-up and running. Great! Let's get cracking on with the application. You can skip this step if you already have an iOS project. Otherwise;
 
-Launch your Xcode
-File -> New -> Project
-In the "Choose a template for your new project" modal, select App and click Next
-We will set "sim-card-auth-ios" as the Product Name, however, you can use what ever the name of your project is.
-Select your Team, and make sure to assign an organization identifier using a reverse domain notation.
-We will keep it simple, and use a Storyboard, UIKit App Delegate and Swift as the development language.
-Uncheck "Use Code Data" if it is checked, and click Next.
-Select the folder you want to store your project and click Next.
-Xcode will create your project.
+Launch your Xcode  
+File -> New -> Project  
+In the "Choose a template for your new project" modal, select App and click Next  
+We will set "sim-card-auth-ios" as the Product Name, however, you can use what ever the name of your project is  
+Select your Team, and make sure to assign an organization identifier using a reverse domain notation  
+We will keep it simple, and use a Storyboard, UIKit App Delegate and Swift as the development language  
+Uncheck "Use Code Data" if it is checked, and click Next  
+Select the folder you want to store your project and click Next  
+Xcode will create your project  
 
 As you will see, it is a pretty simple project with a single ViewControlller. At this point we do not need to worry about the AppDelegate or SceneDelegate. This will be enough for us to demostrate the SubscriberCheck.
 
@@ -571,7 +567,7 @@ We initialise our `subscriberService` with a concrete implementation `Subscriber
 ```swift
 @IBAction func next(_ sender: Any) {
 
-    guard var phoneNumber = phoneNumberTextField.text else {
+    guard let phoneNumber = phoneNumberTextField.text else {
         return
     }
 
@@ -580,13 +576,14 @@ We initialise our `subscriberService` with a concrete implementation `Subscriber
         // Without leading + or 0's
         // For example: {country_code}{number}, 447940448591
         // Remove double 00's
-        if let range = phoneNumber.range(of: "00") {
-            phoneNumber.replaceSubrange(range, with: "")
+        var strippedPhoneNumber = phoneNumber.trimmingCharacters(in: .whitespacesAndNewlines)
+        if let range = strippedPhoneNumber.range(of: "00") {
+            strippedPhoneNumber.replaceSubrange(range, with: "")
         }
 
         controls(enabled: false)
 
-        subscriberService.check(phoneNumber: phoneNumber) { [weak self] (checkResult) in
+        subscriberService.check(phoneNumber: strippedPhoneNumber) { [weak self] (checkResult) in
 
             DispatchQueue.main.async {
                 switch checkResult {
@@ -628,7 +625,7 @@ Now that our code is complete, you can run the application on a real device. Bea
 //Video
 
 ## Next
-You can view a completed version of this sample app in the [sim-card-auth-ios](https://github.com/tru-ID/sim-card-auth-ios) repo on GitHub.
+The completed sample app can be found in the **tru.ID** [sim-card-auth-ios][https://github.com/tru-ID/sim-card-auth-ios/] Github repository.
 
 ## Troubleshooting
 ### Mobile Data is Required
