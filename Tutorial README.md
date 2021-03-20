@@ -176,9 +176,7 @@ Xcode integrates well with Github, and you can add Swift Packages very easily. I
 
 Type `https://github.com/tru-ID/tru-sdk-ios.git`, and tap Next.
 
-Xcode should be able to find the package. Check the correct package version is selected.
-
-Now that the SDK is added, we can import it when we are implementing the workflow.
+Xcode should be able to find the package. Check the correct package version is selected. Now that the SDK is added, we can import it when we are implementing the workflow.
 
 #### Using CocoaPods
 While we recommend using Swift Package Manager, **tru.Id** iOS SDK also supports add your dependency via CocoaPods. If you are familiar with CocoaPods and prefer using it, all you need to do is to create a Podfile and add the **tru.ID** pod spec the following way:
@@ -194,9 +192,9 @@ Make sure to run ```$ pod install``` in your project directory. After the cocoap
 You can get additional information from **tru.ID** [iOS SDK](https://github.com/tru-ID/tru-sdk-ios).
  
  ### Defining Endpoints
- Your app may have its own ways to defining and access external service URLs, and these endpoints may be stored in configuration files such as a plist, or in your Swift code. In this tutorial, we will be storing the development and production base URLs in a plist called `TruIdService-Info.plist`. These server endpoints proxy some the requests through to the **tru.ID** API.
+ Your app may have its own ways for defining and access external service URLs, and these endpoints may be stored in configuration files such as a plist, or in your Swift code. In this tutorial, we will be storing the development and production base URLs in a plist called `TruIdService-Info.plist`. These server endpoints proxy some of the requests through to the **tru.ID** API.
  
-Create group called `util` in the project navigator
+Create group called `util` in the Project Navigator
 File -> New -> File
 Select Property List in the dialog
 Click Next
@@ -251,7 +249,7 @@ struct AppConfiguration {
 The `AppConfiguration` struct simply reaches to the main bundle and searches for a `plist` called `TruIdService-Info`. If found, it reads the plist as a dictionary and binds that to the `configuration` variable. This URL is provided to the clients of the struct via the `baseURL() -> String?` method.
 
 ### It's All About the Network
-It is time to create a new group called `service` in the project navigator. We will implement Model layer classes, structs, protocols and enums necessary in this folder and files. Note that, none of the files in this group should be importing `UIKit`.
+It is time to create a new group called `service` in the Project Navigator. We will implement Model layer classes, structs, protocols and enums necessary in this folder and files. Note that, none of the files in this group should be importing `UIKit`.
 
 Create Swift file in the `service` group called `SessionEndpoint.swift`. In this file, we will define a protocol called `Endpoint` and a enum of `NetworkError` and a class which implements the protocol.  Let's define the protocol `Endpoint` and `NetworkError` enum as in the following in this file.
 
@@ -275,9 +273,9 @@ enum NetworkError: Error {
     case noData
 }
 ```
-The purpose of the `Endpoint` protocol is to hide implementation details from the clients of this protocol. It has two methods and a variable `baseURL`. It represents one REST API endpoint. You can implement this protocol using URLSession, or with Alamofire. For the purposes of this tutorial, we will keep it simple and implement the protocol using URLSession.
+The purpose of  `Endpoint` protocol is to hide implementation details from the clients of this protocol. It has two methods and a variable `baseURL`. It represents one REST API endpoint. You can implement this protocol using URLSession, or with Alamofire. For the purposes of this tutorial, we will keep it simple and implement the protocol using URLSession.
 
-Now implement a class called `SessionEndpoint`. This is our implementation of simple network requests using URLSession.
+Now implement a class called `SessionEndpoint` with in the `SessionEndpoint.swift` file. This is our implementation of simple network requests using URLSession.
 
 ```
 final class SessionEndpoint: Endpoint {
@@ -351,9 +349,9 @@ final class SessionEndpoint: Endpoint {
 }
 ```
 
-The `init()` method of the class load a base URL from the `AppConfiguration` which defined earlier. It will return an URL either for a development server or a production server depending on the build scheme. The final line of the `init()` creates a URLSession using a private static method. Not that `createSession()` method create a configuration which doesn't cache or persist network related information; it is `ephemeral` for additional security.
+The `init()` method of the class loads a base URL from the `AppConfiguration` which we defined earlier. It will return an URL either for a development server or a production server depending on the build scheme. The final line of the `init()` creates a URLSession using a private static method. Note that `createSession()` method creates a configuration which doesn't cache or persist network related information; it is `ephemeral` for additional security.
 
-The rest of the file contains the `Endpoint` protocol implementation. First method `makeRequest<>..` creates a data task using the URLRequest provided and initates the call. When the reponse is received, method calls the `handler` closure for success or failure cases. If data exists and there are no error scenarios, then it attempts to decode the data to the model type provided.
+The rest of the file contains the `Endpoint` protocol implementation. First method `makeRequest<>..` creates a data task using the URLRequest provided and initates the call. When the reponse is received, the method calls the `handler` closure for success or failure cases. If data exists and there are no error scenarios, then it attempts to decode the data to the model type provided.
 
 The `createURLRequest(..)` method receives three parameters; HTTP method name, the URL and an optional payload if the request is a POST request, for instance. The method returns a `URLRequest` object, which is then used by the `makeRequest<>..` method during the execution of the workflow.
 
@@ -393,10 +391,10 @@ struct Links: Codable {
     let check_url: [String : String]
 }
 ```
-Note that, we are using the response model provided by the **tru-ID** REST API documentation as basis for this struct. In a real life scenarios, your architecture and production servers may expose a different REST response model. It is for you to decide. It is important that `SubscriberCheck` implements the `Codable` protocol as this will help `JSONSerialization.data(..)` decode the json response to the `SubscriberCheck` easily. 
+Note that, we are using the response model provided by the **tru-ID** [REST API](https://developer.tru.id/docs/reference/api#operation/create-subscriber-check) documentation as basis for this struct. In a real life scenarios, your architecture and production servers may expose a different REST response model. It is for you to decide. It is important that `SubscriberCheck` implements the `Codable` protocol as this will help `JSONSerialization.data(..)` decode the json response to the `SubscriberCheck` easily. 
 
-### Use case and the Workflow
-In this section, we will define a protocol for our primary use case, and implement the workflow. Ultimately, the UI layer of our application is concern about what the user is going to request. At this layer, we shouldn't be concerned about "How" it is going to be done. A simple `Subscriber` protocol which defines a function to receive a phone number and provide a closure for the SubscriberCheck results should be sufficient. 
+### Implement the Use Case and the Workflow
+Now that we have defined the UI interface and the Network reques/response mechanics, let's bridge the two and implement our business logic. In this section, we will define a protocol for our primary use case, and implement the workflow. Ultimately, the UI layer of our application is concern about what the user is going to request. At this layer, we shouldn't be concerned about "How" it is going to be done. Since we are only concerned with SubscriberCheck, a simple `Subscriber` protocol which defines a function to receive a phone number and provide a closure for the SubscriberCheck results should be sufficient. 
 
 Create Swift file in the `service` group called `SubscriberCheckService.swift`. In this file, define the `Subscriber` protocol as the following:
 
