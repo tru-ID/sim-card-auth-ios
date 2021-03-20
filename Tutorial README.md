@@ -110,7 +110,7 @@ All UI components are Horizontally aligned in the container using constraints. Y
 
 The view layout should look like this:
 
-![Design preview](tutorial-images/main_storyboard.png)
+![Main Storyboard](tutorial-images/main_storyboard.png)
 
 There are a couple of configuration you may want to do for these UI components.
 
@@ -128,7 +128,7 @@ phoneNumberText
 nextButton
 checkResults
 
-![Design preview](tutorial-images/outlets.png =850x255)
+![Outlets](tutorial-images/outlets.png)
 
 Cool! This will allow us to retrieve the phone number entered by the user, and control the state to provide feedback to the user. We now have one last thing to do related to the storyboard.
 
@@ -211,13 +211,13 @@ Click Create
  production_server_base_url
 
  ```
- ![Design preview](tutorial-images/plist.png)
+ ![Plist](tutorial-images/plist.png)
  
  You must ensure to assign the correct value to the `development_server_base_url`. This value is the one you are provided from the Terminal when you set-up and ran your development server at the begining of this tutorial. For production, you should implement your own backend and add the URL to your endpoints here in the `production_server_base_url`.
 
  In order to read the plist,  we create a `struct` called `AppConfiguration`, which deals with loading the correct endpoint so we do not have to worry when we are implementing the main use cases.
 
-![Design preview](tutorial-images/util_project_navigator.png)
+![Project Navigation](tutorial-images/util_project_navigator.png)
 
 ```
 import Foundation
