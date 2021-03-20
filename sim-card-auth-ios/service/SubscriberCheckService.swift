@@ -22,26 +22,22 @@ protocol Subscriber {
 
 final class SubscriberCheckService {
 
-    // Note that Node.js development server API documentation and **tru.ID** call conventions are slightly different
-    // Development server forwards requests to https://eu.api.tru.id/subscriber_check/v0.1/checks
-    // Response is strip down as well.
+    // Note that **tru.ID** CLI Node.js development server API and call conventions are slightly different.
+    // i.e Response is strip down.
     // Your production server may have a different endpoint, and response model.
+    // Note that the development server will forwards requests to https://eu.api.tru.id/subscriber_check/v0.1/checks
     let path = "/subscriber-check"
-    let baseUrl: String
-    let endpoint: Endpoint<SubscriberCheck>
-    
-    init() {
-        var configuration = AppConfiguration()
-        configuration.loadServerConfiguration()
-        baseUrl = configuration.baseURL()!//Fail early so that we know there is something wrong
-        endpoint = Endpoint<SubscriberCheck>(withBaseURL: baseUrl)
+    let endpoint: Endpoint
+        
+    init(){
+        self.endpoint = SessionEndpoint()
     }
 
     /// Initiates the SubscriberCheck workflow and calls the closure for success/failure
     /// - Parameters:
     ///   - phoneNumber: e164 confirming phone number
     ///   - handler: closure to execute either on success or failure scenarios for the validation results
-    func check(phoneNumber: String, handler: @escaping (Result<SubscriberCheck, NetworkError>) -> Void) {
+    public func check(phoneNumber: String, handler: @escaping (Result<SubscriberCheck, NetworkError>) -> Void) {
 
         self.createSubscriberCheck(phoneNumber: phoneNumber) { (createResult) in
             var checkURL = ""
@@ -82,7 +78,7 @@ final class SubscriberCheckService {
     
     private func createSubscriberCheck(phoneNumber: String,
                                          handler: @escaping (Result<SubscriberCheck, NetworkError>) -> Void) {
-        let urlString = baseUrl + path
+        let urlString = endpoint.baseURL + path
 
         guard let url = URL(string: urlString) else {
             handler(.failure(.invalidURL))
@@ -96,12 +92,12 @@ final class SubscriberCheckService {
     
     /// Retrieves the results of a SubscriberCheck given a check Id
     /// - Parameters:
-    ///   - checkId: Check id receives when you created the SubscriberCheck @link createSubscriberCheck
+    ///   - checkId: Check id receives when you created the SubscriberCheck `createSubscriberCheck`
     ///   - handler: callback
     private func retrieveSubscriberCheck(checkId: String,
                                          handler: @escaping (Result<SubscriberCheck, NetworkError>) -> Void) {
 
-        let urlString = baseUrl + path + "/" + checkId
+        let urlString = endpoint.baseURL + path + "/" + checkId
 
         guard let url = URL(string: urlString) else {
             handler(.failure(.invalidURL))
@@ -114,7 +110,7 @@ final class SubscriberCheckService {
     }
 
     
-    /// Note that this call will made over the celluler network
+    /// This method uses the **tru.ID** SDK to initiate call over the cellular network.
     /// - Parameters:
     ///   - subscriberCheckURL: URL that you received from **your** (development/production) server
     ///   - handler: callback on the results of the call

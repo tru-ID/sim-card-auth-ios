@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		F301133E25F3D43300F4B6F8 /* TruIdService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F301133D25F3D43300F4B6F8 /* TruIdService-Info.plist */; };
 		F301134425F3D4CB00F4B6F8 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F301134325F3D4CB00F4B6F8 /* AppConfiguration.swift */; };
-		F36DF41925F3AE1400CD5421 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36DF41825F3AE1400CD5421 /* Endpoint.swift */; };
+		F36DF41925F3AE1400CD5421 /* SessionEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36DF41825F3AE1400CD5421 /* SessionEndpoint.swift */; };
 		F36DF42225F3AE5C00CD5421 /* SubscriberCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36DF42125F3AE5C00CD5421 /* SubscriberCheck.swift */; };
 		F3BE64AF25ECE80F00CBAB40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BE64AE25ECE80F00CBAB40 /* AppDelegate.swift */; };
 		F3BE64B125ECE80F00CBAB40 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BE64B025ECE80F00CBAB40 /* SceneDelegate.swift */; };
@@ -44,7 +44,7 @@
 		F301133D25F3D43300F4B6F8 /* TruIdService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TruIdService-Info.plist"; sourceTree = "<group>"; };
 		F301134325F3D4CB00F4B6F8 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		F36DF41025F3926F00CD5421 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		F36DF41825F3AE1400CD5421 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		F36DF41825F3AE1400CD5421 /* SessionEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionEndpoint.swift; sourceTree = "<group>"; };
 		F36DF42125F3AE5C00CD5421 /* SubscriberCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberCheck.swift; sourceTree = "<group>"; };
 		F3BE64AB25ECE80F00CBAB40 /* sim-card-auth-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "sim-card-auth-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3BE64AE25ECE80F00CBAB40 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +94,7 @@
 		F301134225F3D49600F4B6F8 /* util */ = {
 			isa = PBXGroup;
 			children = (
+				F301133D25F3D43300F4B6F8 /* TruIdService-Info.plist */,
 				F301134325F3D4CB00F4B6F8 /* AppConfiguration.swift */,
 			);
 			path = util;
@@ -104,7 +105,7 @@
 			children = (
 				F36DF42125F3AE5C00CD5421 /* SubscriberCheck.swift */,
 				F3BE65AA25F37B9A00CBAB40 /* SubscriberCheckService.swift */,
-				F36DF41825F3AE1400CD5421 /* Endpoint.swift */,
+				F36DF41825F3AE1400CD5421 /* SessionEndpoint.swift */,
 			);
 			path = service;
 			sourceTree = "<group>";
@@ -144,7 +145,6 @@
 				F3BE64B425ECE80F00CBAB40 /* Main.storyboard */,
 				F3BE64B925ECE81000CBAB40 /* LaunchScreen.storyboard */,
 				F3BE64BC25ECE81000CBAB40 /* Info.plist */,
-				F301133D25F3D43300F4B6F8 /* TruIdService-Info.plist */,
 			);
 			path = "sim-card-auth-ios";
 			sourceTree = "<group>";
@@ -326,7 +326,7 @@
 				F3BE64AF25ECE80F00CBAB40 /* AppDelegate.swift in Sources */,
 				F3BE65AB25F37B9A00CBAB40 /* SubscriberCheckService.swift in Sources */,
 				F3BE64B125ECE80F00CBAB40 /* SceneDelegate.swift in Sources */,
-				F36DF41925F3AE1400CD5421 /* Endpoint.swift in Sources */,
+				F36DF41925F3AE1400CD5421 /* SessionEndpoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

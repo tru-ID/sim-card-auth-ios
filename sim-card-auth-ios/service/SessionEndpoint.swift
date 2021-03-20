@@ -14,18 +14,41 @@ enum NetworkError: Error {
     case noData
 }
 
-final class Endpoint<T: Decodable> {
+protocol Endpoint {
+    var baseURL: String { get }
+    func makeRequest<U: Decodable>(urlRequest: URLRequest,
+                     handler: @escaping (Result<U, NetworkError>) -> Void)
+    
+    func createURLRequest(method: String,
+                          url: URL,
+                          payload:[String : String]?) -> URLRequest
+}
+
+final class SessionEndpoint: Endpoint {
 
     let baseURL: String
-    let session: URLSession
+    private let session: URLSession
 
-    init(withBaseURL url: String) {
-        baseURL = url
-        session = Endpoint.createSession()
+    init() {
+        var configuration = AppConfiguration()
+        configuration.loadServerConfiguration()
+        baseURL = configuration.baseURL()!//Fail early so that we know there is something wrong
+        session = SessionEndpoint.createSession()
     }
 
-    func makeRequest(urlRequest: URLRequest,
-                     handler: @escaping (Result<T, NetworkError>) -> Void) {
+    private static func createSession() -> URLSession {
+
+        let configuration = URLSessionConfiguration.ephemeral //We do not want OS to cache or persist
+        configuration.allowsCellularAccess = true
+        configuration.waitsForConnectivity = true
+        configuration.networkServiceType = .responsiveData
+
+        return URLSession(configuration: configuration)
+    }
+    
+    // MARK: Protocol Implementation
+    func makeRequest<U: Decodable>(urlRequest: URLRequest,
+                     handler: @escaping (Result<U, NetworkError>) -> Void) {
         
         let task = session.dataTask(with: urlRequest) { (data, response, error) in
 
@@ -47,23 +70,13 @@ final class Endpoint<T: Decodable> {
 
             print("Reponse: \(String(describing: String(data: data, encoding: .utf8)))")
 
-            if let dataModel = try? JSONDecoder().decode(T.self, from: data) {
+            if let dataModel = try? JSONDecoder().decode(U.self, from: data) {
                     handler(.success(dataModel))
                 return
             }
         }
 
         task.resume()
-    }
-
-    private static func createSession() -> URLSession {
-
-        let configuration = URLSessionConfiguration.ephemeral //We do not want OS to cache or persist
-        configuration.allowsCellularAccess = true
-        configuration.waitsForConnectivity = true
-        configuration.networkServiceType = .responsiveData
-
-        return URLSession(configuration: configuration)
     }
 
     func createURLRequest(method: String, url: URL, payload:[String : String]?) -> URLRequest {
