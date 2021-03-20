@@ -248,11 +248,166 @@ struct AppConfiguration {
 }
 
 ```
-
 The `AppConfiguration` struct simply reaches to the main bundle and searches for a `plist` called `TruIdService-Info`. If found, it reads the plist as a dictionary and binds that to the `configuration` variable. This URL is provided to the clients of the struct via the `baseURL() -> String?` method.
 
-### It's All About the `Network`
+### It's All About the Network
+It is time to create a new group called `service` in the project navigator. We will implement Model layer classes, structs, protocols and enums necessary in this folder and files. Note that, none of the files in this group should be importing `UIKit`.
 
+Create Swift file in the `service` group called `SessionEndpoint.swift`. In this file, we will define a protocol called `Endpoint` and a enum of `NetworkError` and a class which implements the protocol.  Let's define the protocol `Endpoint` and `NetworkError` enum as in the following in this file.
+
+```
+import Foundation
+
+protocol Endpoint {
+    var baseURL: String { get }
+    func makeRequest<U: Decodable>(urlRequest: URLRequest,
+                     handler: @escaping (Result<U, NetworkError>) -> Void)
+    
+    func createURLRequest(method: String,
+                          url: URL,
+                          payload:[String : String]?) -> URLRequest
+}
+
+enum NetworkError: Error {
+    case invalidURL
+    case connectionFailed(String)
+    case httpNotOK
+    case noData
+}
+```
+The purpose of the `Endpoint` protocol is to hide implementation details from the clients of this protocol. It has two methods and a variable `baseURL`. It represents one REST API endpoint. You can implement this protocol using URLSession, or with Alamofire. For the purposes of this tutorial, we will keep it simple and implement the protocol using URLSession.
+
+Now implement a class called `SessionEndpoint`. This is our implementation of simple network requests using URLSession.
+
+```
+final class SessionEndpoint: Endpoint {
+
+    let baseURL: String
+    private let session: URLSession
+
+    init() {
+        var configuration = AppConfiguration()
+        configuration.loadServerConfiguration()
+        baseURL = configuration.baseURL()!//Fail early so that we know there is something wrong
+        session = SessionEndpoint.createSession()
+    }
+
+    private static func createSession() -> URLSession {
+
+        let configuration = URLSessionConfiguration.ephemeral //We do not want OS to cache or persist
+        configuration.allowsCellularAccess = true
+        configuration.waitsForConnectivity = true
+        configuration.networkServiceType = .responsiveData
+
+        return URLSession(configuration: configuration)
+    }
+    
+    // MARK: Protocol Implementation
+    func makeRequest<U: Decodable>(urlRequest: URLRequest,
+                     handler: @escaping (Result<U, NetworkError>) -> Void) {
+        
+        let task = session.dataTask(with: urlRequest) { (data, response, error) in
+
+            if let error = error {
+                handler(.failure(.connectionFailed(error.localizedDescription)))
+                return
+            }
+
+            guard let httpResponse = response as? HTTPURLResponse,
+                  (200...299).contains(httpResponse.statusCode) else {
+                handler(.failure(.connectionFailed("HTTP not OK")))
+                return
+            }
+
+            guard let data = data else {
+                handler(.failure(.noData))
+                return
+            }
+
+            print("Reponse: \(String(describing: String(data: data, encoding: .utf8)))")
+
+            if let dataModel = try? JSONDecoder().decode(U.self, from: data) {
+                    handler(.success(dataModel))
+                return
+            }
+        }
+
+        task.resume()
+    }
+
+    func createURLRequest(method: String, url: URL, payload:[String : String]?) -> URLRequest {
+
+        var urlRequest = URLRequest(url: url)
+        urlRequest.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+        urlRequest.httpMethod = method
+
+        if let payload = payload {
+            let jsonData = try! JSONSerialization.data(withJSONObject: payload, options: .prettyPrinted)
+            urlRequest.httpBody = jsonData
+        }
+
+        return urlRequest
+    }
+}
+```
+
+The `init()` method of the class load a base URL from the `AppConfiguration` which defined earlier. It will return an URL either for a development server or a production server depending on the build scheme. The final line of the `init()` creates a URLSession using a private static method. Not that `createSession()` method create a configuration which doesn't cache or persist network related information; it is `ephemeral` for additional security.
+
+The rest of the file contains the `Endpoint` protocol implementation. First method `makeRequest<>..` creates a data task using the URLRequest provided and initates the call. When the reponse is received, method calls the `handler` closure for success or failure cases. If data exists and there are no error scenarios, then it attempts to decode the data to the model type provided.
+
+The `createURLRequest(..)` method receives three parameters; HTTP method name, the URL and an optional payload if the request is a POST request, for instance. The method returns a `URLRequest` object, which is then used by the `makeRequest<>..` method during the execution of the workflow.
+
+There is nothing extra-ordinary going on.
+
+### Model
+It is now time to define our model object which will hold the information about the results of a SubscriberCheck. 
+
+Create a Swift file called `SubscriberCheck` in the `service` group, and implement a struct with the same name as below:
+```
+import Foundation
+
+// Response model based on https://developer.tru.id/docs/reference/api#operation/create-subscriber-check
+struct SubscriberCheck: Codable {
+    let check_id: String?
+    let check_url: String?
+    let status: SubcriberCheckStatus?
+    let match: Bool?
+    let no_sim_change: Bool?
+    let charge_amount: Int?
+    let charge_currency: String?
+    let created_at: String?
+    let snapshot_balance: Int?
+    let _links: Links?
+}
+
+enum SubcriberCheckStatus: String, Codable {
+    case ACCEPTED
+    case PENDING
+    case COMPLETED
+    case EXPIRED
+    case ERROR
+}
+
+struct Links: Codable {
+    let `self`: [String : String]
+    let check_url: [String : String]
+}
+```
+Note that, we are using the response model provided by the **tru-ID** REST API documentation as basis for this struct. In a real life scenarios, your architecture and production servers may expose a different REST response model. It is for you to decide. It is important that `SubscriberCheck` implements the `Codable` protocol as this will help `JSONSerialization.data(..)` decode the json response to the `SubscriberCheck` easily. 
+
+### Use case and the Workflow
+In this section, we will define a protocol for our primary use case, and implement the workflow. Ultimately, the UI layer of our application is concern about what the user is going to request. At this layer, we shouldn't be concerned about "How" it is going to be done. A simple `Subscriber` protocol which defines a function to receive a phone number and provide a closure for the SubscriberCheck results should be sufficient. 
+
+Create Swift file in the `service` group called `SubscriberCheckService.swift`. In this file, define the `Subscriber` protocol as the following:
+
+```
+protocol Subscriber {
+    func check(phoneNumber: String,
+               handler: @escaping (Result<SubscriberCheck, NetworkError>)-> Void)
+}
+
+```
+`Result<>` generic type refers to a model object and an `Enum` which provides error cases. Fairly simple. Now let's look 
 
 
 ### Implement the User Action

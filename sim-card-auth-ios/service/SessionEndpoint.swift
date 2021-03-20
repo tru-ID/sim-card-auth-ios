@@ -1,18 +1,11 @@
 //
-//  Server.swift
+//  SessionEndpoint.swift
 //  sim-card-auth-ios
 //
 //  Created by Murat Yakici on 06/03/2021.
 //
 
 import Foundation
-
-enum NetworkError: Error {
-    case invalidURL
-    case connectionFailed(String)
-    case httpNotOK
-    case noData
-}
 
 protocol Endpoint {
     var baseURL: String { get }
@@ -22,6 +15,13 @@ protocol Endpoint {
     func createURLRequest(method: String,
                           url: URL,
                           payload:[String : String]?) -> URLRequest
+}
+
+enum NetworkError: Error {
+    case invalidURL
+    case connectionFailed(String)
+    case httpNotOK
+    case noData
 }
 
 final class SessionEndpoint: Endpoint {
