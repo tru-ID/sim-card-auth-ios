@@ -1,6 +1,4 @@
 
-https://user-images.githubusercontent.com/6573797/111884094-205e3f00-89b7-11eb-810d-961aeaba012e.mp4
-
 # How to Add SIM Card Based Mobile Authentication to your iOS App [with tru.ID](https://tru.id)
 
 ## Overview
@@ -629,14 +627,9 @@ self?.controls(enabled:true)
 Now that our code is complete, you can run the application on a real device. Bear in mind that SIM card based authentication is not be possible on a Simulator as you require a SIM Card.
 
   <video controls="true" allowfullscreen="true">
-    <source src="tutorial-images/subscriber_check.mp4" type="video/mp4">
-  </video>
-  
-https://user-images.githubusercontent.com/6573797/111884103-2ce29780-89b7-11eb-864a-d47a21fec71b.mp4
-
-
-  
-  
+    <source src="https://user-images.githubusercontent.com/6573797/111884103-2ce29780-89b7-11eb-864a-d47a21fec71b.mp4" type="video/mp4">
+    Subscriber Check on iOS
+  </video> 
   
 
 ## Next
