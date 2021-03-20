@@ -128,7 +128,7 @@ phoneNumberText
 nextButton
 checkResults
 
-![Design preview](tutorial-images/outlets.png)
+![Design preview](tutorial-images/outlets.png =850x255)
 
 Cool! This will allow us to retrieve the phone number entered by the user, and control the state to provide feedback to the user. We now have one last thing to do related to the storyboard.
 
