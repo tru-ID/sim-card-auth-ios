@@ -625,13 +625,9 @@ self?.controls(enabled:true)
 ### "Run Forest, Run!"
 Now that our code is complete, you can run the application on a real device. Bear in mind that SIM card based authentication is not be possible on a Simulator as you require a SIM Card.
 
-<!-- blank line -->
-<figure class="video_container">
   <video controls="true" allowfullscreen="true">
     <source src="tutorial-images/subscriber_check.mp4" type="video/mp4">
   </video>
-</figure>
-<!-- blank line -->
 
 ## Next
 The completed sample app can be found in the **tru.ID** [sim-card-auth-ios][https://github.com/tru-ID/sim-card-auth-ios/] Github repository.
