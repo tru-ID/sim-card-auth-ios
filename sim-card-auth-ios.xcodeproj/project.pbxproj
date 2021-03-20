@@ -103,8 +103,8 @@
 		F36DF41725F3ADFD00CD5421 /* service */ = {
 			isa = PBXGroup;
 			children = (
-				F36DF42125F3AE5C00CD5421 /* SubscriberCheck.swift */,
 				F3BE65AA25F37B9A00CBAB40 /* SubscriberCheckService.swift */,
+				F36DF42125F3AE5C00CD5421 /* SubscriberCheck.swift */,
 				F36DF41825F3AE1400CD5421 /* SessionEndpoint.swift */,
 			);
 			path = service;

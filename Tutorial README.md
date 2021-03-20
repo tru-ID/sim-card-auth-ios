@@ -29,7 +29,7 @@ For you to integrate **tru.ID** with your own applications, you will also need:
 If you have checked all the above, let's dive straight into adding SubscriberCheck functionality to your iOS applications.
 
 
-### Set-up **tru.ID** CLI and run a development server
+### Set-up **tru.ID** CLI and Run a Development Server
 **tru.ID** provides [**tru.ID** CLI](https://github.com/tru-ID/cli) to quickly set a development environment which will be necessary to test sending and receiving network requests when developing your application. 
 
 Using the CLI, we will create a Node.js development server on our machines. This development server will open up a local tunnel and will make it publicly accessible over the Internet. 
@@ -124,9 +124,9 @@ When you are happy release the keys and drag. You will be prompted to enter a na
 
 We need to connect the UITextField, UIButton and the UIImageView as well. Let's perform the above steps for these as well respectively, and name them as follows:
 
-phoneNumberText
-nextButton
-checkResults
+- phoneNumberText
+- nextButton
+- checkResults
 
 ![Outlets](tutorial-images/outlets.png)
 
@@ -251,9 +251,17 @@ struct AppConfiguration {
 
 The `AppConfiguration` struct simply reaches to the main bundle and searches for a `plist` called `TruIdService-Info`. If found, it reads the plist as a dictionary and binds that to the `configuration` variable. This URL is provided to the clients of the struct via the `baseURL() -> String?` method.
 
-## How does the workflow run?
+### It's All About the `Network`
 
-Work in progress.
+
+
+### Implement the User Action
+At this point we have our UI and we have necessary code to execute the SubscriberCheck workflow. This is where we put the final touches.
+
+
+### Run Forest, Run!
+
+//Some Video
 
 
 ## Troubleshooting

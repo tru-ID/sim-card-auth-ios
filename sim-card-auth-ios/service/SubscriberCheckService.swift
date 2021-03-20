@@ -17,7 +17,8 @@ import TruSDK
  - Up on success, make a final request the application server using the check Id. This call will return the Subscriber Check information.
  */
 protocol Subscriber {
-    func check(phoneNumber: String, handler: @escaping (Result<SubscriberCheck, NetworkError>)-> Void)
+    func check(phoneNumber: String,
+               handler: @escaping (Result<SubscriberCheck, NetworkError>)-> Void)
 }
 
 final class SubscriberCheckService {
