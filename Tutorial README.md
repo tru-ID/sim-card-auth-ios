@@ -137,7 +137,7 @@ Let's also insert an action. When user taps on the Next button, we want the `Vie
 
 It is time to write some code to manage the UI state. The first method we are going to add is `controls(enabled: Bool)`. This method will help us show or hide `checkResults`, `busyActivityIndicator`. We will also disable the `phoneNumberTextField` is the SubcriberCheck flow is in progress.
 
-```
+```swift
 // MARK: UI Controls Configure || Enable/Disable
 
 private func controls(enabled: Bool) {
@@ -218,7 +218,7 @@ Click Create
 
 ![Project Navigation](tutorial-images/util_project_navigator.png)
 
-```
+```swift
 import Foundation
 
 struct AppConfiguration {
@@ -254,7 +254,7 @@ It is time to create a new group called `service` in the Project Navigator. We w
 
 Create Swift file in the `service` group called `SessionEndpoint.swift`. In this file, we will define a protocol called `Endpoint` and a enum of `NetworkError` and a class which implements the protocol.  Let's define the protocol `Endpoint` and `NetworkError` enum as in the following in this file.
 
-```
+```swift
 import Foundation
 
 protocol Endpoint {
@@ -278,7 +278,7 @@ The purpose of  `Endpoint` protocol is to hide implementation details from the c
 
 Now implement a class called `SessionEndpoint` with in the `SessionEndpoint.swift` file. This is our implementation of simple network requests using URLSession.
 
-```
+```swift
 final class SessionEndpoint: Endpoint {
 
     let baseURL: String
@@ -364,7 +364,7 @@ There is nothing extra-ordinary going on.
 It is now time to define our model object which will hold the information about the results of a SubscriberCheck. 
 
 Create a Swift file called `SubscriberCheck` in the `service` group, and implement a struct with the same name as below:
-```
+```swift
 import Foundation
 
 // Response model based on https://developer.tru.id/docs/reference/api#operation/create-subscriber-check
@@ -401,7 +401,7 @@ Now that we have defined the user interface and defined the network request/resp
 
 Create Swift file in the `service` group called `SubscriberCheckService.swift`. In this file, define the `Subscriber` protocol as the following:
 
-```
+```swift
 protocol Subscriber {
     func check(phoneNumber: String,
                handler: @escaping (Result<SubscriberCheck, NetworkError>) -> Void)
@@ -413,7 +413,7 @@ We will later define a variable of `Subscriber` type in our `ViewController.swif
 
 Now we are ready to implement the business logic. Create a class called `SubscriberCheckService` in the `SunscriberCheckService` which implements the `Subscriber` protocol.
 
-```
+```swift
 final class SubscriberCheckService: Subscriber {
     let path = "/subscriber-check"
     let endpoint: Endpoint
@@ -444,7 +444,7 @@ At this point, we have our UI and we have necessary code to execute the Subscrib
 
 Let's first define a variable of `Subscriber` type in our `ViewController` and then implement the `next(_ sender: Any)` IBAction. Add the following code to your view controller.
 
-```
+```swift
 var subscriberService: Subscriber!
 
 override func viewDidLoad() {
@@ -455,7 +455,7 @@ override func viewDidLoad() {
 ```
 We initialise our `subscriberService` with a concrete implementation `SubscriberCheckService` which we defined in the previous section. `SubscriberCheckService` knows how to execute the workflow and all `ViewController` needs to do is to call `check(phoneNumber: String, ..)` and control the UI state. It is time to implement the `next(_ sender: Any)`. It will look as follows:
 
-```
+```swift
 @IBAction func next(_ sender: Any) {
 
     guard var phoneNumber = phoneNumberTextField.text else {
@@ -506,11 +506,13 @@ In any case, we restore the UI controls back to their original state so that the
 ``self?.controls(enabled:true)``
 
 
-### Run Forest, Run!
+### "Run Forest, Run!"
 Now that our code is complete, you can run the application on a real device. Bear in mind that SIM card based authentication is not be possible on a Simulator as you require a SIM Card.
 
 //Video
 
+## Next
+You can view a completed version of this sample app in the [sim-card-auth-ios](https://github.com/tru-ID/sim-card-auth-ios) repo on GitHub.
 
 ## Troubleshooting
 ### Mobile Data is Required
