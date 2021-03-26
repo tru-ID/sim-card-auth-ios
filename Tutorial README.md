@@ -457,12 +457,9 @@ The following sequence diagram shows each step.
 
 Let's first define three methods corresponding to each of these steps. Later, this will help stitch the above steps together.
 
-**TODO <<<<<<<<<<<<<<reviewed to here>>>>>>>>>>>>>>
-
-First, make a POST request to the development server [see initial set-up](#set-up-truid-cli-and-run-a-development-server). This call can be made over any type of network (cellular/wifi). The  server should return a SubscriberCheck URL. Add the following method to the `SubscriberCheckService` class.
+First, make a `POST` request to the development server to create a SubscriberCheck. This call can be made over any type of network (cellular/wifi). The server should return a SubscriberCheck `check_url`. Add the following method to the `SubscriberCheckService` class.
 
 ```swift
-
 private func createSubscriberCheck(phoneNumber: String,
                                      handler: @escaping (Result<SubscriberCheck, NetworkError>) -> Void) {
     let urlString = endpoint.baseURL + path
@@ -478,11 +475,11 @@ private func createSubscriberCheck(phoneNumber: String,
 }
 
 ```
-This method receives a phone number, constructs the full URL using the baseURL and the subcriber check path which is defined by the development server. Again, note that this may be different for you. It is up to you to define who your production REST API will be.
+This method receives a phone number, constructs the full URL using the `baseURL` and the SubscriberCheck `path` which is defined by the development server.
 
-Then you create a payload (simply the phone number), and create a `URLRequest` using the `endpoint.createURLRequest(..)` method. And then you use the `makeRequest(..)` method of the endpoint and pass the `urlRequest` and the handler.
+Next, create a payload (simply the phone number), and create a `URLRequest` using the `endpoint.createURLRequest(..)` method. Then you use the `makeRequest(..)` method of the endpoint and pass the `urlRequest` and the handler.
 
-You need to request the URL, which will be returned by the `createSubscriberCheck(..)`. However, this call needs to be made by the **tru-ID** SDK. Let's create a helper method called `requestSubscriberCheckURL(..)`:
+You need to request the `check_url` which will be returned by the `createSubscriberCheck(..)`. However, this call needs to be made by the **tru-ID** SDK to ensure the request is made over the cellular network. Let's create a helper method called `requestSubscriberCheckURL(..)`:
 
 ```swift
 private func requestSubscriberCheckURL(subscriberCheckURL: String,
@@ -501,7 +498,7 @@ Do not forget to import the `TruSDK`.
 import TruSDK
 ```
 
-The SDK will ensure that this call will be made over the cellular network. When the `openCheckUrl(..)` calls the closure, you call the `handler` as well.
+As discussed, the SDK will ensure that this call will be made over the cellular network. When the `openCheckUrl(..)` calls the closure, you call the `handler` as well.
 
 Define one last method called `retrieveSubscriberCheck(..)` as follows:
 
@@ -521,12 +518,12 @@ private func retrieveSubscriberCheck(checkId: String,
     endpoint.makeRequest(urlRequest: urlRequest, handler: handler)
 }
 ```
-Very similar to the first method you defined, with only a few differences. Note, that you are calling the endpoint with a extra  `checkId` parameter, and this time it is a GET call. This method will get the results of the check performed.
+
+This is very similar to the first method you defined, with a few differences. Note, that you are calling the endpoint with a extra `checkId` parameter, and this time it is a `GET` call. This method will get the results of the check performed.
 
 Now, let's chain the method in our `Subscriber` protocol implementation.
 
 ```swift
-
 public func check(phoneNumber: String, handler: @escaping (Result<SubscriberCheck, NetworkError>) -> Void) {
 
     createSubscriberCheck(phoneNumber: phoneNumber) { (createResult) in
@@ -567,16 +564,15 @@ public func check(phoneNumber: String, handler: @escaping (Result<SubscriberChec
 }
 ```
 
-First, you are making a call using the `createSubscriberCheck(phoneNumber: phoneNumber) ...` method. The callback to this method, inspects the `Result<>`. If it is a success, then fetches the `checkURL` and `checkID` and stores them in local variables which will be used later.
+First, you are making a call using the `createSubscriberCheck(phoneNumber: phoneNumber) ...` method. The callback to this method inspects the `Result<>`. If it is a success it fetches the `checkURL` and `checkID` and stores them in local variables which will be used later.
 
-The second step is to use **tru.ID** iOS SDK to make a call to SubscriberCheck URL. The SDK will make this call over the cellular network. The user must have a data plan. Behind the scenes this call will redirect, and eventually return OK. All will be handled by the SDK.
+The second step is to use **tru.ID** iOS SDK to make a call to SubscriberCheck `check_url`. The SDK makes this call over the cellular network so the user must have a data plan. Behind the scenes this call will redirect and eventually return OK. All this will be handled by the SDK.
 
-The third steps is to make a final request to the server using the `checkID` that you've got as a result of making the first call. This call will return the SubscriberCheck information; whether the check is successful or not.
-
-You can find more on the **tru.ID** [subscriber check workflow integration](https://developer.tru.id/docs/subscriber-check/integration).
+The third step is to make a final request to the server using the `checkID` that you've got as a result of making the first call. This call will return the SubscriberCheck result; whether the check is successful or not.
 
 ### Implement the User Action
-At this point, UI and code to execute the SubscriberCheck workflow is ready. This is where you put the final touches and get the View layer interact with the use case.
+
+At this point the UI and code to execute the SubscriberCheck workflow is ready. This is where you put the final touches and get the View layer to interact with the use case.
 
 Let's first define a variable of `Subscriber` type in our `ViewController` and then implement the `next(_ sender: Any)` IBAction previous we created. 
 
@@ -591,7 +587,7 @@ override func viewDidLoad() {
 }
 
 ```
-This initialises  `subscriberService` with a concrete implementation `SubscriberCheckService` which you defined in the previous section. `SubscriberCheckService` knows how to execute the workflow and all `ViewController` needs to do is to call `check(phoneNumber: String, ..)` method and control the UI state. It is time to implement the `next(_ sender: Any)`. It will look as follows:
+This initialises `subscriberService` with a concrete implementation `SubscriberCheckService` which you defined in the previous section. `SubscriberCheckService` knows how to execute the workflow and all `ViewController` needs to do is to call `check(phoneNumber: String, ..)` method and control the UI state. It is time to implement the `next(_ sender: Any)`. It looks as follows:
 
 ```swift
 @IBAction func next(_ sender: Any) {
@@ -628,8 +624,10 @@ This initialises  `subscriberService` with a concrete implementation `Subscriber
     }
 
 }
-
 ```
+
+**TODO <<<<<<<<<<<<<<reviewed to here>>>>>>>>>>>>>>
+
 The implementation of the method first checks whether there is text in the `phoneNumberTextField` and whether it is empty or not. Note that in a production code, you should validate that the phone number against the e164 specification. We are keeping it simple for the purposes of this tutorial, and only removing `00` from the begining of the phone number if exists and trimming.
 
 The second step is to disable parts of the user interface, show the activity indicator and let it spin when user taps the Next button. The third step is to call the `check(phoneNumber:)` method of the `subscriberService`. The handler will provide a `checkResult` which is a type of `Result<SubscriberCheck,NetworkError>`.  Note that this closure will not be called in the main queue, therefore you need to wrap any code which accesses UIKit in a `DispatchQueue.main.async`.
