@@ -8,6 +8,8 @@ SubscriberCheck can be used when augmenting existing 2FA or anti-fraud workflows
 
 In this tutorial, you will walk you through how to build a simple iOS application which integrates **tru.ID** SubscriberCheck as your application's authentication workflow.
 
+If you'd prefer to go directly to the completed code it's in the [sim-card-auth-ios](https://github.com/tru-ID/sim-card-auth-ios/) Github repository.
+
 ## Before you begin
 
 If you have not done so already;
@@ -626,15 +628,13 @@ This initialises `subscriberService` with a concrete implementation `SubscriberC
 }
 ```
 
-**TODO <<<<<<<<<<<<<<reviewed to here>>>>>>>>>>>>>>
+The implementation of the `next` method first checks whether there is text in the `phoneNumberTextField` and whether it is empty or not. Note that in a production code, you should validate that the phone number against the [E.164 specification](https://www.itu.int/rec/T-REC-E.164-201011-I/en). We are keeping it simple for the purposes of this tutorial and only removing `00` from the begining of the phone number if exists and trimming.
 
-The implementation of the method first checks whether there is text in the `phoneNumberTextField` and whether it is empty or not. Note that in a production code, you should validate that the phone number against the e164 specification. We are keeping it simple for the purposes of this tutorial, and only removing `00` from the begining of the phone number if exists and trimming.
-
-The second step is to disable parts of the user interface, show the activity indicator and let it spin when user taps the Next button. The third step is to call the `check(phoneNumber:)` method of the `subscriberService`. The handler will provide a `checkResult` which is a type of `Result<SubscriberCheck,NetworkError>`.  Note that this closure will not be called in the main queue, therefore you need to wrap any code which accesses UIKit in a `DispatchQueue.main.async`.
+The second step is to disable parts of the user interface, show the activity indicator and let it spin when user taps the `Next` button. The third step is to call the `check(phoneNumber:)` method of the `subscriberService`. The handler will provide a `checkResult` which is a type of `Result<SubscriberCheck,NetworkError>`.  Note that this closure should not be called in the main queue, therefore you need to wrap any code which accesses UIKit in a `DispatchQueue.main.async`.
 
 If the workflow executes successfully then you can access model details and reconfigure the UI. Note that the `.success` case doesn't necessarily mean that validation is successful, it is simply an indication that workflow executed without encountering any network errors.
 
-In order to understand if you validated the phone number you need to inspect the `.success` payload which is of type `SubscriberCheck`. The following line will ensure that validation results are reflected on the UI:
+In order to understand if you validated the phone number you need to inspect the `.success` payload which is of type `SubscriberCheck`. The following line will ensure that validation results are reflected in the UI:
 
 ```swift
 self?.configureCheckResults(match: subscriberCheck.match ?? false, noSimChange: subscriberCheck.no_sim_change ?? false)
@@ -646,15 +646,23 @@ In any case, you restore the UI controls back to their original state with the f
 self?.controls(enabled:true)
 ```
 
-### "Run Forest, Run!"
-Now that our code is complete, you can run the application on a real device. Bear in mind that SIM card based authentication is not be possible on a Simulator as you require a SIM Card. [Subscriber Check on iOS](https://user-images.githubusercontent.com/6573797/111884103-2ce29780-89b7-11eb-864a-d47a21fec71b.mp4)
+### Run the App
+
+Now that our code is complete, you can run the application on a real device. Bear in mind that SIM card based authentication is not be possible on a Simulator as you require a SIM Card with an active data connection.
+
+**TODO: use .mp4 in docs**
+
+[Subscriber Check on iOS](https://user-images.githubusercontent.com/6573797/111884103-2ce29780-89b7-11eb-864a-d47a21fec71b.mp4)
 
  ![App in action](tutorial-images/subscriber_check.gif)
 
-## Next
-The completed sample app can be found in the **tru.ID** [sim-card-auth-ios](https://github.com/tru-ID/sim-card-auth-ios/) Github repository.
+## Where next?
+
+- The completed sample app can be found in the **tru.ID** [sim-card-auth-ios](https://github.com/tru-ID/sim-card-auth-ios/) Github repository.
+- Take a look at the [**tru.ID** iOS SDK on GitHub](https://github.com/tru-ID/tru-sdk-ios)
 
 ## Troubleshooting
+
 ### Mobile Data is Required
 
 Don't forget that the SubcriberCheck validation requires your mobile device to have data plan from your network operator and you should enable mobile data.
