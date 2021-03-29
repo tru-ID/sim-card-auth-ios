@@ -251,9 +251,7 @@ struct AppConfiguration {
 
 The `AppConfiguration` struct simply reaches to the main bundle and searches for a `plist` called `TruIdService-Info`. If found, it reads the plist as a dictionary and binds that to the `configuration` variable. This URL is provided to the clients of the struct via the `baseURL() -> String?` method.
 
-### It's All About the Network
-
-**TODO: is this the simplest possible setup?**
+### Setup the Network
 
 Now is the time to create a new group called `service` in the Project Navigator. In here you'll implement Model layer classes, structs, protocols and enums. Note that none of the files in this group should be importing `UIKit`.
 
