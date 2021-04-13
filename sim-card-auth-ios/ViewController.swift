@@ -23,7 +23,7 @@ class ViewController: UIViewController {
 
     @IBAction func next(_ sender: Any) {
 
-        guard var phoneNumber = phoneNumberTextField.text else {
+        guard let phoneNumber = phoneNumberTextField.text else {
             return
         }
 
@@ -32,13 +32,14 @@ class ViewController: UIViewController {
             // Without leading + or 0's
             // For example: {country_code}{number}, 447940448591
             // Remove double 00's
-            if let range = phoneNumber.range(of: "00") {
-                phoneNumber.replaceSubrange(range, with: "")
+            var strippedPhoneNumber = phoneNumber.trimmingCharacters(in: .whitespacesAndNewlines)
+            if let range = strippedPhoneNumber.range(of: "00") {
+                strippedPhoneNumber.replaceSubrange(range, with: "")
             }
 
             controls(enabled: false)
 
-            subscriberService.check(phoneNumber: phoneNumber) { [weak self] (checkResult) in
+            subscriberService.check(phoneNumber: strippedPhoneNumber) { [weak self] (checkResult) in
 
                 DispatchQueue.main.async {
                     switch checkResult {

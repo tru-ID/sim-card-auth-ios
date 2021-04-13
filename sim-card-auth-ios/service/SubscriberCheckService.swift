@@ -42,7 +42,7 @@ final class SubscriberCheckService: Subscriber {
     ///   - handler: closure to execute either on success or failure scenarios for the validation results
     public func check(phoneNumber: String, handler: @escaping (Result<SubscriberCheck, NetworkError>) -> Void) {
 
-        self.createSubscriberCheck(phoneNumber: phoneNumber) { (createResult) in
+        createSubscriberCheck(phoneNumber: phoneNumber) { (createResult) in
             var checkURL = ""
             var checkID = ""
 

@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>development_server_base_url</key>
-	<string>https://spotty-pig-91.loca.lt</string>
+	<string>Check your Tru.ID CLI result on the Terminal</string>
 	<key>production_server_base_url</key>
 	<string>Base URL of Your Production Server Address should go here</string>
 </dict>
