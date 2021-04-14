@@ -186,11 +186,20 @@ enum SubcriberCheckStatus: String, Codable {
     case EXPIRED
     case ERROR
 }
+
+enum NetworkError: Error {
+    case invalidURL
+    case connectionFailed(String)
+    case httpNotOK
+    case noData
+}
 ```
 
 **tru-ID** [REST API](https://developer.tru.id/docs/reference/api#operation/create-subscriber-check) documentation provides us the basis for this struct. In production, your architecture and servers may expose a different REST response model. Also important to note that `SubscriberCheck` implements the `Codable` protocol as this will help `JSONSerialization.data(..)` to decode the json response to the `SubscriberCheck` easily.
 
-Next, define a protocol which will help View layer to talk to the Model layer implementation. The View layer of our application is concerned about what the user is going to request. At this layer, you shouldn't be concerned about "How" it is going to be done. Since it is all about SubscriberCheck, a simple `Subscriber` protocol which defines a function to receive a phone number and provide a closure for the SubscriberCheck results should be sufficient. 
+Next, define a protocol which will help View layer to talk to the Model layer implementation. The View layer of our application is concerned about what the user is going to request. At this layer, you shouldn't be concerned about "How" it is going to be done. Since it is all about SubscriberCheck, a simple `Subscriber` protocol which defines a function to receive a phone number and provide a closure for the SubscriberCheck results should be sufficient.
+
+Also define a simple `enum` to handle error cases for the network calls you will be implementing in the later sections.
 
 Create a Swift file in the `service` group called `SubscriberCheckService.swift`. In this file, define the `Subscriber` protocol as the following:
 
@@ -365,12 +374,6 @@ protocol Endpoint {
                           payload:[String : String]?) -> URLRequest
 }
 
-enum NetworkError: Error {
-    case invalidURL
-    case connectionFailed(String)
-    case httpNotOK
-    case noData
-}
 ```
 
 The purpose of  the `Endpoint` protocol is to hide implementation details from the clients of this protocol. It has two methods and a variable `baseURL`. It represents one REST API endpoint. You can implement this protocol using URLSession, or with Alamofire. For the purposes of this tutorial, let's keep it simple and implement the protocol using URLSession.
