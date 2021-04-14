@@ -23,3 +23,10 @@ enum SubcriberCheckStatus: String, Codable {
     case EXPIRED
     case ERROR
 }
+
+enum NetworkError: Error {
+    case invalidURL
+    case connectionFailed(String)
+    case httpNotOK
+    case noData
+}

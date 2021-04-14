@@ -17,13 +17,6 @@ protocol Endpoint {
                           payload:[String : String]?) -> URLRequest
 }
 
-enum NetworkError: Error {
-    case invalidURL
-    case connectionFailed(String)
-    case httpNotOK
-    case noData
-}
-
 final class SessionEndpoint: Endpoint {
 
     let baseURL: String
