@@ -16,6 +16,34 @@ class ViewController: UIViewController {
 
     var subscriberService: Subscriber!
 
+    // MARK: UI Controls Configure || Enable/Disable
+
+    private func controls(enabled: Bool) {
+
+        if enabled {
+            busyActivityIndicator.stopAnimating()
+        } else {
+            busyActivityIndicator.startAnimating()
+        }
+
+        phoneNumberTextField.isEnabled = enabled
+        nextButton.isEnabled = enabled
+        checkResults.isHidden = !enabled
+    }
+
+    private func configureCheckResults(match: Bool, noSimChange: Bool) {
+
+        if match {
+            let image = UIImage(systemName: "person.fill.checkmark")
+            self.checkResults.image = image?.withRenderingMode(.alwaysTemplate)
+            self.checkResults.tintColor = .green
+        } else {
+            let image = UIImage(systemName: "person.fill.xmark")
+            self.checkResults.image = image?.withRenderingMode(.alwaysTemplate)
+            self.checkResults.tintColor = .red
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         subscriberService = SubscriberCheckService()
@@ -54,34 +82,6 @@ class ViewController: UIViewController {
             }
         }
 
-    }
-
-    // MARK: UI Controls Configure || Enable/Disable
-
-    private func controls(enabled: Bool) {
-
-        if enabled {
-            busyActivityIndicator.stopAnimating()
-        } else {
-            busyActivityIndicator.startAnimating()
-        }
-
-        phoneNumberTextField.isEnabled = enabled
-        nextButton.isEnabled = enabled
-        checkResults.isHidden = !enabled
-    }
-    
-    private func configureCheckResults(match: Bool, noSimChange: Bool) {
-        
-        if match {
-            let image = UIImage(systemName: "person.fill.checkmark")
-            self.checkResults.image = image?.withRenderingMode(.alwaysTemplate)
-            self.checkResults.tintColor = .green
-        } else {
-            let image = UIImage(systemName: "person.fill.xmark")
-            self.checkResults.image = image?.withRenderingMode(.alwaysTemplate)
-            self.checkResults.tintColor = .red
-        }
     }
 
 }

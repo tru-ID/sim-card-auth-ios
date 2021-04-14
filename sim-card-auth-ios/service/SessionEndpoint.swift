@@ -68,7 +68,7 @@ final class SessionEndpoint: Endpoint {
                 return
             }
 
-            print("Reponse: \(String(describing: String(data: data, encoding: .utf8)))")
+            print("Response: \(String(describing: String(data: data, encoding: .utf8)))")
 
             if let dataModel = try? JSONDecoder().decode(U.self, from: data) {
                     handler(.success(dataModel))
