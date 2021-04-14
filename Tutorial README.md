@@ -165,9 +165,7 @@ private func configureCheckResults(match: Bool, noSimChange: Bool) {
 You will use these methods later in the `next(_ sender: Any)` that is triggered by the user tapping the `Next` button.
 
 ### Model
-It is now time to work on the Model layer and define our model object which holds SubscriberCheck results. 
-
-Create a Swift file called `SubscriberCheck.swift` in the `service` group, and implement a struct with the same name as below:
+It is now time to work on the Model layer and define our model object which holds SubscriberCheck results. In the Project Navigator, select the project and use your Secondary click (default is two fingers) to show the menu. Select New Group and create a group called `service`. Then create a Swift file called `SubscriberCheck.swift` in this `service` group, and implement a struct with the same name as below:
 
 ```swift
 import Foundation
