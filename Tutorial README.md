@@ -99,7 +99,7 @@ Navigate to the `Main.storyboard`. You need to add a few UI components to receiv
 - A UILabel with a text "Phone number" to indicate what the next text field is for
 - A UITextField so that user can enter their phone number
 - A UIButton to trigger the SubscriberCheck request
-- An UImageView to show whether SubcriberCheck is successful or not
+- A UImageView to show whether SubcriberCheck is successful or not
 
 All UI components are Horizontally aligned in the container using constraints. You should also need to define constraints to anchor the componets as well. Start with the top "Verification" UILable and specify the alignment between the Safe Area and the label. Do the same for all other componets, define a constraint for the Top space, and where necessary add additional constraints for width and height.
 
@@ -528,7 +528,7 @@ private func retrieveSubscriberCheck(checkId: String,
     endpoint.makeRequest(urlRequest: urlRequest, handler: handler)
 }
 ```
-This is very similar to the first method you defined, with a few differences. Note, that you are calling the endpoint with a extra `checkId` parameter, and this time it is a `GET` call. This method will get the results of the check performed.
+This is very similar to the first method you defined, with a few differences. Note, that you are calling the endpoint with an extra `checkId` parameter, and this time it is a `GET` call. This method will get the results of the check performed.
 
 The third method we need to create is doing the heavy lifting using the **tru.Id** SDK. Let's create a  method called `requestSubscriberCheckURL(..)`:
 
