@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18092"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="sim_card_auth_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verification" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PdV-Mh-APQ">
+                                <rect key="frame" x="132.5" y="155" width="149.5" height="37"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="31"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="oPl-6e-9Be">
+                                <rect key="frame" x="188.5" y="210" width="37" height="37"/>
+                            </activityIndicatorView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KdQ-wU-nme">
+                                <rect key="frame" x="107" y="276" width="200" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="NLW-2S-lbM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="phonePad" textContentType="tel"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kew-AR-bJl">
+                                <rect key="frame" x="167" y="382" width="80" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="hvX-wp-R9s"/>
+                                </constraints>
+                                <state key="normal" title="Next"/>
+                                <connections>
+                                    <action selector="next:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yea-9F-qto"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jmM-HG-zPr">
+                                <rect key="frame" x="151" y="247" width="112" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.fill.checkmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Jfu-WA-Ne9">
+                                <rect key="frame" x="137" y="459.5" width="140" height="140.5"/>
+                                <color key="tintColor" systemColor="systemGreenColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="140" id="djz-rL-HZ6"/>
+                                    <constraint firstAttribute="height" constant="143.5" id="ytm-Zc-ZOv"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="KdQ-wU-nme" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4Td-s2-jVk"/>
+                            <constraint firstItem="oPl-6e-9Be" firstAttribute="top" secondItem="PdV-Mh-APQ" secondAttribute="bottom" constant="18" id="GtF-7X-zDq"/>
+                            <constraint firstItem="oPl-6e-9Be" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="H4A-Zs-Spi"/>
+                            <constraint firstItem="PdV-Mh-APQ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="111" id="LTa-Ws-mec"/>
+                            <constraint firstItem="KdQ-wU-nme" firstAttribute="top" secondItem="PdV-Mh-APQ" secondAttribute="bottom" constant="84" id="QlD-bu-sh8"/>
+                            <constraint firstItem="jmM-HG-zPr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="R7S-uA-fef"/>
+                            <constraint firstItem="PdV-Mh-APQ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cZG-Ug-6Qu"/>
+                            <constraint firstItem="Jfu-WA-Ne9" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="e5J-gT-wtp"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Jfu-WA-Ne9" secondAttribute="bottom" constant="260.5" id="m8m-Q4-xiU"/>
+                            <constraint firstItem="Kew-AR-bJl" firstAttribute="top" secondItem="KdQ-wU-nme" secondAttribute="bottom" constant="72" id="oGR-F0-HUG"/>
+                            <constraint firstItem="Kew-AR-bJl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pdE-0f-0P6"/>
+                            <constraint firstItem="jmM-HG-zPr" firstAttribute="top" secondItem="PdV-Mh-APQ" secondAttribute="bottom" constant="55" id="vtd-XQ-2nJ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="busyActivityIndicator" destination="oPl-6e-9Be" id="e1r-5p-8Gr"/>
+                        <outlet property="checkResults" destination="Jfu-WA-Ne9" id="ELG-Eq-b9H"/>
+                        <outlet property="nextButton" destination="Kew-AR-bJl" id="M1m-Nt-p4o"/>
+                        <outlet property="phoneNumberTextField" destination="KdQ-wU-nme" id="PnQ-Q4-zGC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="131.8840579710145" y="67.633928571428569"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="person.fill.checkmark" catalog="system" width="128" height="88"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
