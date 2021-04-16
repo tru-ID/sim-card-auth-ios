@@ -11,12 +11,12 @@ import Foundation
 struct SubscriberCheck: Codable {
     let check_id: String?
     let check_url: String?
-    let status: SubcriberCheckStatus?
+    let status: SubscriberCheckStatus?
     let match: Bool?
     let no_sim_change: Bool?
 }
 
-enum SubcriberCheckStatus: String, Codable {
+enum SubscriberCheckStatus: String, Codable {
     case ACCEPTED
     case PENDING
     case COMPLETED
